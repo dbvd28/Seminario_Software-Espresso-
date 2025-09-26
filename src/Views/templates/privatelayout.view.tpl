@@ -18,15 +18,18 @@
 </head>
 
 <body>
-  <header>
+  <header style="background-color: #9c653d;">
     <input type="checkbox" class="menu_toggle" id="menu_toggle" />
     <label for="menu_toggle" class="menu_toggle_icon">
       <div class="hmb dgn pt-1"></div>
       <div class="hmb hrz"></div>
       <div class="hmb dgn pt-2"></div>
     </label>
+   <div class="brand" style="display: flex; align-items:center; gap:12px;">
+    <img src="public/imgs/hero/logo.png" alt="Coffee Logo" class="logo" style="height:40px; width:auto;"/>
     <h1>{{SITE_TITLE}}</h1>
-    <nav id="menu">
+  </div>
+    <nav id="menu" style="background-color: #9c653d;">
       <ul>
         <li><a href="index.php?page={{PRIVATE_DEFAULT_CONTROLLER}}"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
         {{foreach NAVIGATION}}
@@ -35,14 +38,15 @@
         <li><a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
       </ul>
     </nav>
+   <span>{{if ~CART_ITEMS}}<a href="index.php?page=Checkout-Checkout"><i class="fa-solid fa-cart-shopping" style="color:white;"></i></a></a>{{~CART_ITEMS}}{{endif ~CART_ITEMS}}</span>
     {{with login}}
     <span class="username">{{userName}} <a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i></a></span>
     {{endwith login}}
   </header>
-  <main>
+  <main style="flex:1;">
     {{{page_content}}}
   </main>
-  <footer>
+  <footer style="background-color: #9c653d;">
     <div>Todo los Derechos Reservados {{~CURRENT_YEAR}} &copy;</div>
   </footer>
   {{foreach EndScripts}}

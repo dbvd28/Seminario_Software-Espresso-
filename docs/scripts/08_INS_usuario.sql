@@ -1,0 +1,3 @@
+INSERT INTO `usuario` (`usercod`, `useremail`, `username`, `userpswd`, `userfching`, `userpswdest`, `userpswdexp`, `userest`, `useractcod`, `userpswdchg`, `usertipo`) VALUES (NULL, 'diegocrash124@gmail.com', 'Diego Varela', '$2y$10$CfcEScM6sTTwfc6gLO/yqO4.P57I2n/Rjqy9GZnceuKj3OAepv.0y', '2025-07-27 21:29:32', 'ACT', '2025-10-25 00:00:00', 'ACT', '1a20c611c80e307e8430472d754d9fb40e70373fdad7ff2fcf5c3b154250f527', '2025-07-27 21:29:32', 'PBL')
+
+INSERT INTO `roles_usuarios` (`usercod`, `rolescod`, `roleuserest`, `roleuserfch`, `roleuserexp`) VALUES ('1', 'Admin', 'ACT', '2025-08-28 00:00:00', '2025-08-09 00:00:00')

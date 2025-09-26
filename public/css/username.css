@@ -1,0 +1,60 @@
+.form-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 2rem;
+  background-color: #fffaf3;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+  color: #4b2e2e;
+}
+
+/* Title */
+.form-container h2 {
+  text-align: center;
+  color: #5c3d2e;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Label */
+.form-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+/* Input field */
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d8c3a5;
+  background-color: #fffdf7;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.form-container input[type="text"]:focus {
+  outline: none;
+  border-color: #a47148;
+}
+
+/* Button */
+.form-container button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1.25rem;
+  background-color: #a47148;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #8d5c36;
+}

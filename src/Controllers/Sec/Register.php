@@ -4,6 +4,7 @@ namespace Controllers\Sec;
 
 use Controllers\PublicController;
 use \Utilities\Validators;
+use Utilities\Site;
 use Exception;
 
 class Register extends PublicController
@@ -40,6 +41,7 @@ class Register extends PublicController
             }
         }
         $viewData = get_object_vars($this);
+        Site::addLink("public/css/signin.css");
         \Views\Renderer::render("security/sigin", $viewData);
     }
 }

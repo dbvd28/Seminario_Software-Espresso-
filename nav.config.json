@@ -16,6 +16,16 @@
       "id":"Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
+    },
+    {
+      "id":"Menu_Client_Quejas",
+      "nav_url": "index.php?page=Client_Quejas",
+      "nav_label": "<i class=\"fas fa-comment-alt\"></i>&nbsp;Quejas y Sugerencias"
+    },
+    {
+      "id":"Menu_Administrator_Quejas",
+      "nav_url": "index.php?page=Administrator_Quejas",
+      "nav_label": "<i class=\"fas fa-comments\"></i>&nbsp;Administrar Quejas"
     }
   ]
 }

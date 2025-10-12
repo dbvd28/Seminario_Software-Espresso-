@@ -1,10 +1,23 @@
 <div class="container">
-    <button class="back-btn" id="back_btn">Atras</button>
+  <button class="back-btn" id="back_btn">Atras</button>
     <h1>Producto #{{productId}}</h1>
 
-    <form action="index.php?page=Administrator-Products&mode={{mode}}&id={{productId}}" method="post" class="details">
+    <form action="index.php?page=Administrator-Products&mode={{mode}}&id={{productId}}" method="post" enctype="multipart/form-data" class="details">
         
     <h2>Detalles del producto</h2>
+        <div class="imagen_producto">
+  <img id="product-image" src="{{productImgUrl}}" alt="{{productName}}">
+  
+  <label for="imageUpload" class="edit-image-btn">Editar imagen</label>
+  <input 
+    type="file" 
+    id="imageUpload" 
+    name="productImage" 
+    accept="image/*" 
+    style="display: none;"
+    onchange="previewImage(event)"
+  >
+</div>
     <div class="details-grid">
       <div>
         <label for="idprod" class="label">ID Producto: </label>
@@ -61,10 +74,18 @@
         </div>
     </div>
     <div class="actions">
- <button type="submit" class="btn_submit" name="btnEnviar"{{if readonly}} hidden {{endif readonly}}>Guardar cambios</button>
+      <button type="submit" class="btn_submit" name="btnEnviar"{{if readonly}} hidden {{endif readonly}}>Guardar cambios</button>
     </div>
   </form>
+</div>
    <script>
+  function previewImage(event) {
+    const image = document.getElementById('product-image');
+    const file = event.target.files[0];
+    if (file) {
+      image.src = URL.createObjectURL(file);
+    }
+  }
     document.addEventListener("DOMContentLoaded", ()=>{
         document.getElementById("back_btn")
             .addEventListener("click", (e)=>{

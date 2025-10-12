@@ -53,14 +53,14 @@ class Products extends PrivateController
 
     public function run(): void
     {
-        Site::addLink("public/css/indvProduct.css");
+
         $this->getQueryParamsData();
         if ($this->viewData["mode"] !== "INS") {
             $this->getDataFromDB();
         } else {
-           
+
             $this->viewData["proveedor"] = ProductDAO::getAllProv();
-             $this->viewData["categoria"] = ProductDAO::getAllCat();
+            $this->viewData["categoria"] = ProductDAO::getAllCat();
         }
         if ($this->isPostBack()) {
             $this->getBodyData();
@@ -69,7 +69,7 @@ class Products extends PrivateController
             }
         }
         $this->prepareViewData();
-        Site::addLink("public/css/indvProduct.css");
+        Site::addLink("public/css/invproduct.css");
         Renderer::render("Administrator/product", $this->viewData);
     }
 
@@ -123,22 +123,23 @@ class Products extends PrivateController
 
     private function getDataFromDB()
     {
-        $tmpPedido = ProductDAO::getById(
+        $tmpProducto = ProductDAO::getById(
             $this->viewData["productId"]
         );
-        if ($tmpPedido && count($tmpPedido) > 0) {
-            $this->viewData["productName"] = $tmpPedido["productName"];
-            $this->viewData["productDescription"] = $tmpPedido["productDescription"];
-            $this->viewData["productPrice"] = $tmpPedido["productPrice"];
-            $this->viewData["productStock"] = $tmpPedido["productStock"];
-            $this->viewData["estado"] = $tmpPedido["productStatus"];
-            $idp = $tmpPedido["proveedorId"];
+        if ($tmpProducto && count($tmpProducto) > 0) {
+            $this->viewData["productName"] = $tmpProducto["productName"];
+            $this->viewData["productDescription"] = $tmpProducto["productDescription"];
+            $this->viewData["productPrice"] = $tmpProducto["productPrice"];
+            $this->viewData["productStock"] = $tmpProducto["productStock"];
+            $this->viewData["productImgUrl"] = $tmpProducto["productImgUrl"];
+            $this->viewData["estado"] = $tmpProducto["productStatus"];
+            $idp = $tmpProducto["proveedorId"];
             $proveedores = ProductDAO::getAllProv();
             foreach ($proveedores as &$proveedor) {
                 $proveedor["selectedidp"] = ($proveedor["proveedorId"] == $idp) ? "selected" : "";
             }
             $this->viewData["proveedor"] = $proveedores;
-            $idc = $tmpPedido["categoriaId"];
+            $idc = $tmpProducto["categoriaId"];
             $categorias = ProductDAO::getAllCat();
             foreach ($categorias as &$categoria) {
                 $categoria["selectedidc"] = ($categoria["categoriaId"] == $idc) ? "selected" : "";
@@ -150,8 +151,6 @@ class Products extends PrivateController
                 "Record for id " . $this->viewData["id"] . " not found."
             );
         }
-        //$this->viewData["proveedor"] = ProductDAO::getAllProv();
-        //$this->viewData["categoria"] = ProductDAO::getAllCat();
     }
 
     private function getBodyData()
@@ -162,9 +161,16 @@ class Products extends PrivateController
                 "Trying to post without parameter ID on body"
             );
         }
-        if (!isset($_POST["nombre"])) {
+        if (!isset($_FILES["productImage"])) {
             $this->throwError(
                 "Something went wrong, try again.",
+                "Trying to post without parameter IMAGE on body" . $_FILES
+            );
+        }
+        if (!isset($_POST["nombre"])) {
+            $this->throwError(
+                "Something went wrong, try ag
+                ain.",
                 "Trying to post without parameter DATE on body"
             );
         }
@@ -231,20 +237,69 @@ class Products extends PrivateController
         $mode = $this->viewData["mode"];
         switch ($mode) {
             case "INS":
-                if (
-                    ProductDAO::newProduct(
-                        $this->viewData["productName"],
-                        $this->viewData["productDescription"],
-                        floatval($this->viewData["productPrice"]),
-                        $this->viewData["productStock"],
-                        $this->viewData["estado"],
-                        intval($this->viewData["prov"]),
-                        intval($this->viewData["cat"])
-                    ) > 0
-                ) {
-                    Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                if (isset($_FILES['productImage']) && $_FILES['productImage']['error'] === 0) {
+                    $targetDir = "public/imgs/hero/";
+                    $fileName = basename($_FILES["productImage"]["name"]);
+                    $targetPath = $targetDir . $fileName;
+                    //Verifica si la imagen ya existe en el folder solo cambia el path
+                    if (file_exists($targetPath)) {
+                        if (
+                            ProductDAO::newProduct(
+                                $this->viewData["productName"],
+                                $this->viewData["productDescription"],
+                                floatval($this->viewData["productPrice"]),
+                                $this->viewData["productStock"],
+                                $this->viewData["estado"],
+                                intval($this->viewData["prov"]),
+                                intval($this->viewData["cat"]),
+                                $targetPath
+                            ) > 0
+                        ) {
+                            Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                        } else {
+                            $this->innerError("global", "Something wrong happend to save the new Product.");
+                        }
+                    } else {
+                        //Si no existe lo agrega al folder y cambia el path
+                        if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $targetPath)) {
+                            if (
+                                ProductDAO::newProduct(
+                                    $this->viewData["productName"],
+                                    $this->viewData["productDescription"],
+                                    floatval($this->viewData["productPrice"]),
+                                    $this->viewData["productStock"],
+                                    $this->viewData["estado"],
+                                    intval($this->viewData["prov"]),
+                                    intval($this->viewData["cat"]),
+                                    $targetPath
+                                ) > 0
+                            ) {
+                                Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                            } else {
+                                $this->innerError("global", "Something wrong happend to save the new Product.");
+                            }
+                        } else {
+
+                            $this->innerError("photo", "Error uploading image.");
+                        }
+                    }
                 } else {
-                    $this->innerError("global", "Something wrong happend to save the new Category.");
+                    if (
+                        ProductDAO::newProduct(
+                            $this->viewData["productName"],
+                            $this->viewData["productDescription"],
+                            floatval($this->viewData["productPrice"]),
+                            $this->viewData["productStock"],
+                            $this->viewData["estado"],
+                            intval($this->viewData["prov"]),
+                            intval($this->viewData["cat"]),
+                            " "
+                        ) > 0
+                    ) {
+                        Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                    } else {
+                        $this->innerError("global", "Something wrong happend to save the new Product.");
+                    }
                 }
                 break;
             case "UPD":
@@ -260,9 +315,36 @@ class Products extends PrivateController
                         intval($this->viewData["cat"])
                     ) > 0
                 ) {
+
+                    if (isset($_FILES['productImage']) && $_FILES['productImage']['error'] === 0) {
+                        $targetDir = "public/imgs/hero/";
+                        $fileName = basename($_FILES["productImage"]["name"]);
+                        $targetPath = $targetDir . $fileName;
+                        //Verifica si la imagen ya existe en el folder solo cambia el path
+                        if (file_exists($targetPath)) {
+
+                            ProductDAO::updateProductImage(
+                                intval($this->viewData["productId"]),
+                                $targetPath
+                            );
+
+                        } else {
+                            //Si no existe lo agrega al folder y cambia el path
+                            if (move_uploaded_file($_FILES["productImage"]["tmp_name"], $targetPath)) {
+
+                                ProductDAO::updateProductImage(
+                                    intval($this->viewData["productId"]),
+                                    $targetPath
+                                );
+                            } else {
+
+                                $this->innerError("photo", "Error uploading image.");
+                            }
+                        }
+                    }
                     Site::redirectToWithMsg(LIST_URL, "Product updated successfuly");
                 } else {
-                    $this->innerError("global", "Something wrong happend while updating the Order.");
+                    $this->innerError("global", "Something wrong happend while updating the Product.");
                 }
                 break;
         }

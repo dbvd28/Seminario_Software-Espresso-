@@ -1,5 +1,5 @@
 INSERT INTO `categorias` ( `nombre`, `descripcion`) VALUES
-( 'Bebidas', 'Bebdias calientes y frias.'),
+( 'Bebidas', 'Bebidas calientes y frias.'),
 ( 'Otros', 'Otro tipo de productos que ofrecemos en nuestra tienda.'),
 ( 'Cafe', 'Nuestro cafe recien tostado.'),
 ( 'Accesorios', 'Accesorios como stickers, funda para el telfono etc.');

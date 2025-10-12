@@ -24,6 +24,14 @@ abstract class PrivateController extends PublicController
 {
     private function _isAuthorized()
     {
+        // Allow authenticated users to access certain controllers without explicit feature assignment
+        $whitelist = [
+            'Controllers\\Client\\Password',
+            'Controllers\\Client\\User',
+        ];
+        if (in_array($this->name, $whitelist, true)) {
+            return;
+        }
         $isAuthorized = \Utilities\Security::isAuthorized(
             \Utilities\Security::getUserId(),
             $this->name,

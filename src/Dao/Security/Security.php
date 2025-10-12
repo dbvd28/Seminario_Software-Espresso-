@@ -92,6 +92,29 @@ class Security extends \Dao\Table
 
         return self::obtenerUnRegistro($sqlstr, $params);
     }
+    
+    static public function getUserById($id)
+    {
+        $sqlstr = "SELECT * from `usuario` where `usercod` = :usercod ;";
+        $params = array("usercod" => $id);
+
+        return self::obtenerUnRegistro($sqlstr, $params);
+    }
+    
+    static public function updateUserPassword($userId, $newPassword)
+    {
+        if (!\Utilities\Validators::IsValidPassword($newPassword)) {
+            return false;
+        }
+        
+        $hashedPassword = self::_hashPassword($newPassword);
+        $sqlstr = "UPDATE usuario SET userpswd = :userpswd, userpswdchg = now() WHERE usercod = :usercod";
+        
+        return self::executeNonQuery($sqlstr, [
+            "userpswd" => $hashedPassword,
+            "usercod" => $userId
+        ]) > 0;
+    }
 
     static private function _saltPassword($password)
     {

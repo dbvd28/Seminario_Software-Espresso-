@@ -18,6 +18,11 @@
       "nav_label": "Carretilla de Compra"
     },
     {
+      "id":"Menu_Client_Orders",
+      "nav_url": "index.php?page=Client_Orders",
+      "nav_label": "<i class=\"fas fa-box\"></i>&nbsp;Mis Pedidos"
+    },
+    {
       "id":"Menu_Client_Quejas",
       "nav_url": "index.php?page=Client_Quejas",
       "nav_label": "<i class=\"fas fa-comment-alt\"></i>&nbsp;Quejas y Sugerencias"

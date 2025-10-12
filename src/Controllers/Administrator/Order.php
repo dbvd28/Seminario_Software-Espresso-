@@ -57,7 +57,12 @@ class Order extends PrivateController
             }
         }
         $this->prepareViewData();
+        // Include base styles and progress bar
         Site::addLink("public/css/order.css");
+        Site::addLink("public/css/progress.css");
+        if (isset($this->viewData["showShipping"]) && $this->viewData["showShipping"] === true) {
+            Site::addLink("public/css/shipping.css");
+        }
         Renderer::render("Administrator/Order", $this->viewData);
     }
 
@@ -255,5 +260,15 @@ class Order extends PrivateController
         $this->viewData["timestamp"] = time();
         $this->viewData["xsrtoken"] = hash("sha256", json_encode($this->viewData));
         $_SESSION[$this->name . "-xsrtoken"] = $this->viewData["xsrtoken"];
+
+        // Progress flags and shipping visibility
+        $estado = $this->viewData["estado"];
+        $this->viewData["showShipping"] = ($estado === "ENV");
+        $this->viewData["isPEND"] = ($estado === "PEND");
+        $this->viewData["isPAG"] = ($estado === "PAG");
+        $this->viewData["isENV"] = ($estado === "ENV");
+        $this->viewData["step1"] = true;
+        $this->viewData["step2"] = ($estado === "PAG" || $estado === "ENV");
+        $this->viewData["step3"] = ($estado === "ENV");
     }
 }

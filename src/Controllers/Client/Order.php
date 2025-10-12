@@ -37,6 +37,10 @@ class Order extends PrivateController
         $this->getDataFromDB();
 
         Site::addLink("public/css/order.css");
+        Site::addLink("public/css/progress.css");
+        if (isset($this->viewData["showShipping"]) && $this->viewData["showShipping"] === true) {
+            Site::addLink("public/css/shipping.css");
+        }
         Renderer::render("Client/order", $this->viewData);
     }
 
@@ -75,6 +79,16 @@ class Order extends PrivateController
         }
         $this->viewData["productos"] = $productos;
 
-      
+        $this->viewData["showShipping"] = ($this->viewData["estado"] === "ENV");
+
+        // Progress flags for steps
+        $estado = $this->viewData["estado"];
+        $this->viewData["isPEND"] = ($estado === "PEND");
+        $this->viewData["isPAG"] = ($estado === "PAG");
+        $this->viewData["isENV"] = ($estado === "ENV");
+        // Step actives (1..3)
+        $this->viewData["step1"] = true; // Pendiente always reached (order created)
+        $this->viewData["step2"] = ($estado === "PAG" || $estado === "ENV");
+        $this->viewData["step3"] = ($estado === "ENV");
     }
 }

@@ -1,0 +1,303 @@
+/* quejas.css */
+.quejas-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.quejas-header {
+  background: linear-gradient(135deg, #845353a9 0%, #6d6a4b 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quejas-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.quejas-table {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+}
+
+.quejas-table thead {
+  background: linear-gradient(135deg, #6c4e4e 0%, #acacac 100%);
+  color: white;
+}
+
+.quejas-table th {
+  padding: 18px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quejas-table td {
+  padding: 16px 15px;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: top;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.quejas-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.quejas-table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quejas-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estados */
+.quejas-table td:nth-child(5) { /* Columna Estado */
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 2px 0;
+}
+
+.quejas-table td:nth-child(5):contains("Pendiente") {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.quejas-table td:nth-child(5):contains("En revisión") {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.quejas-table td:nth-child(5):contains("Respondida") {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Texto pendiente */
+.pendiente {
+  color: #dc3545;
+  font-style: italic;
+  font-weight: 500;
+  background-color: #f8d7da;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Formularios */
+.quejas-table form {
+  margin-bottom: 10px;
+}
+
+.quejas-table textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.quejas-table textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.quejas-table select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.quejas-table select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Botones */
+.quejas-table button {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quejas-table button[type="submit"] {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white;
+}
+
+.quejas-table button[type="submit"]:hover {
+  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.quejas-table button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* Descripción y respuesta */
+.quejas-table td:nth-child(4), /* Descripción */
+.quejas-table td:nth-child(7) { /* Respuesta */
+  max-width: 250px;
+  word-wrap: break-word;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .quejas-container {
+      padding: 15px;
+  }
+  
+  .quejas-table {
+      font-size: 13px;
+  }
+  
+  .quejas-table th,
+  .quejas-table td {
+      padding: 12px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .quejas-header {
+      padding: 20px;
+  }
+  
+  .quejas-header h2 {
+      font-size: 24px;
+  }
+  
+  .quejas-table {
+      display: block;
+      overflow-x: auto;
+  }
+  
+  .quejas-table textarea {
+      min-height: 60px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.quejas-table tbody tr {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.quejas-table tbody tr:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+.quejas-table tbody tr:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+/* Estados específicos para mejor visualización */
+.quejas-table td:nth-child(5)[data-estado="Pendiente"] {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.quejas-table td:nth-child(5)[data-estado="En revisión"] {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.quejas-table td:nth-child(5)[data-estado="Respondida"] {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Agrega esto a tu quejas.css */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+}
+
+.acciones-td {
+  min-width: 250px;
+}
+
+.form-accion {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+
+.btn-responder {
+  background: #28a745 !important;
+}
+
+.btn-estado {
+  background: #17a2b8 !important;
+}

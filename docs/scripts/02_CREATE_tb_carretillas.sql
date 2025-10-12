@@ -1,3 +1,4 @@
+-- Active: 1750516842290@@127.0.0.1@3306@coffeeshop
 CREATE TABLE `proveedores` (
     `proveedorId` INT NOT NULL AUTO_INCREMENT,
     `nombre` VARCHAR(100) NOT NULL,

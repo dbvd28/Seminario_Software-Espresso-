@@ -47,6 +47,26 @@
       "id": "Menu_Username",
       "nav_url": "index.php?page=Client-user&mode=UPD&id={userid}",
       "nav_label":"<i class=\"fas fa-pencil-alt\"></i>&nbsp;Cambiar nombre"
+    },
+    {
+      "id":"Menu_Client_Quejas",
+      "nav_url": "index.php?page=Client_Quejas",
+      "nav_label": "<i class=\"fas fa-comment-alt\"></i>&nbsp;Quejas y Sugerencias"
+    },
+    {
+      "id":"Menu_Administrator_Quejas",
+      "nav_url": "index.php?page=Administrator_Quejas",
+      "nav_label": "<i class=\"fas fa-comments\"></i>&nbsp;Administrar Quejas"
+    },
+    {
+      "id":"Menu_User_Edit",
+      "nav_url": "index.php?page=Client_User&mode=UPD&id={userid}",
+      "nav_label": "<i class=\"fas fa-user-edit\"></i>&nbsp;Editar Nombre de Usuario"
+    },
+    {
+      "id":"Menu_Password_Edit",
+      "nav_url": "index.php?page=Client_Password",
+      "nav_label": "<i class=\"fas fa-key\"></i>&nbsp;Cambiar Contraseña"
     }
   ]
 }

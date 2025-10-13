@@ -1,0 +1,293 @@
+/* Estilos generales */
+.quejas-container {
+    max-width: 95%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    justify-content: center;
+}
+
+/* Encabezado */
+.quejas-header {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+    width: 100%;
+}
+
+.quejas-header h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Contenedor principal del formulario */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.col-md-12 {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Formulario */
+.quejas-form {
+    background: #F5F5DC; /* Beige claro */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(139, 69, 19, 0.3);
+    border: 3px solid #D2B48C; /* Café tan */
+    width: 100%;
+}
+
+.quejas-form h3 {
+    color: #654321; /* Café oscuro */
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 26px;
+    border-bottom: 3px solid #D2B48C;
+    padding-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #5D4037; /* Café medio oscuro */
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #BCAAA4; /* Café claro */
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #FFF8E1; /* Beige muy claro */
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #8D6E63; /* Café medio */
+    box-shadow: 0 0 12px rgba(141, 110, 99, 0.4);
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Botones */
+.button-group {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.button-group button {
+    background: linear-gradient(135deg, #795548, #5D4037);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 8px;
+    min-width: 150px;
+}
+
+.button-group button:hover {
+    background: linear-gradient(135deg, #6D4C41, #4E342E);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(93, 64, 55, 0.5);
+}
+
+.btn-regresar {
+    display: inline-block;
+    background: linear-gradient(135deg, #A1887F, #8D6E63);
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 8px;
+    min-width: 150px;
+}
+
+.btn-regresar:hover {
+    background: linear-gradient(135deg, #8D6E63, #6D4C41);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(141, 110, 99, 0.5);
+    color: white;
+    text-decoration: none;
+}
+
+/* Mensajes de estado */
+.error {
+    background: #FFEBEE;
+    color: #C62828;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    border-left: 5px solid #EF5350;
+    font-size: 15px;
+}
+
+div[style*="color: #155724"] {
+    padding: 15px !important;
+    border-radius: 8px !important;
+    margin-bottom: 25px !important;
+    border-left: 5px solid #4CAF50 !important;
+    font-size: 15px !important;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .quejas-container {
+        max-width: 98%;
+        padding: 15px;
+    }
+    
+    .quejas-form {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .quejas-container {
+        max-width: 100%;
+        padding: 10px;
+        min-height: 90vh;
+    }
+    
+    .quejas-form {
+        padding: 20px;
+    }
+    
+    .quejas-header {
+        padding: 20px;
+    }
+    
+    .quejas-header h2 {
+        font-size: 26px;
+    }
+    
+    .quejas-form h3 {
+        font-size: 22px;
+    }
+    
+    .button-group button,
+    .btn-regresar {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .quejas-form {
+        padding: 15px;
+    }
+    
+    .quejas-header h2 {
+        font-size: 22px;
+    }
+    
+    .quejas-form h3 {
+        font-size: 20px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* Efectos adicionales */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #A1887F; /* Café claro para placeholder */
+    font-style: italic;
+}
+
+.quejas-form {
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.quejas-form::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: linear-gradient(45deg, #8B4513, #D2691E, #8B4513);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+/* Animaciones suaves */
+.quejas-container {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mejoras para pantallas grandes */
+@media (min-width: 1400px) {
+    .quejas-container {
+        max-width: 1300px;
+    }
+    
+    .quejas-form {
+        padding: 50px;
+    }
+    
+    .quejas-header {
+        padding: 40px;
+    }
+    
+    .quejas-header h2 {
+        font-size: 36px;
+    }
+}

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/public/css/quejas.css">
+<link rel="stylesheet" href="/proyecto/Seminario_Software-Espresso-/public/css/quejas.css">
 
 <div class="quejas-container">
   <div class="quejas-header">

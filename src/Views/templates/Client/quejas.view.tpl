@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="public/css/quejas.css">
+<link rel="stylesheet" href="/proyecto/Seminario_Software-Espresso-/public/css/quejasuser.css">
 
 <div class="quejas-container">
   <div class="quejas-header">
@@ -35,32 +35,19 @@
             <button type="submit" name="btnEnviar">Enviar</button>
             
           </div>
+          <div class="button-group">
+          <a href="index.php" class="btn-regresar">Regresar</a>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal para ver respuesta completa -->
-<div class="modal fade" id="respuestaModal" tabindex="-1" aria-labelledby="respuestaModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="respuestaModalLabel">Respuesta Completa</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="respuestaCompleta">
-      </div>
-      <div class="modal-footer">
-        <a href="index.php" class="btn-regresar">Regresar</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
 function verRespuesta(respuesta) {
   document.getElementById('respuestaCompleta').innerText = respuesta;
   var modal = new bootstrap.Modal(document.getElementById('respuestaModal'));
-  modal.show();
+  modal.show();
 }

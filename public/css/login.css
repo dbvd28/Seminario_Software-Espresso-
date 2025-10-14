@@ -90,6 +90,23 @@
   transform: translateY(-2px);
 }
 
+.olvide-password {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.olvide-password a {
+  color: #a47148;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.olvide-password a:hover {
+  color: #8c5e3a;
+  text-decoration: underline;
+}
+
 @keyframes fadeInSlide {
   0% {
     opacity: 0;

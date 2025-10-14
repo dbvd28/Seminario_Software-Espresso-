@@ -292,6 +292,46 @@ class Security extends \Dao\Table
             return false;
         }
     }
+    
+    static public function storeRecoveryToken($userId, $token, $expira)
+    {
+        $sql = "UPDATE usuario 
+                SET userrecoverytoken = :token, 
+                    userrecoveryexpira = :expira 
+                WHERE usercod = :usercod";
+        return self::executeNonQuery($sql, [
+            "token" => $token,
+            "expira" => $expira,
+            "usercod" => $userId
+        ]) > 0;
+    }
+
+    static public function getUsuarioByToken($token)
+    {
+        $sql = "SELECT * FROM usuario 
+                WHERE userrecoverytoken = :token 
+                AND userrecoveryexpira > NOW()";
+        return self::obtenerUnRegistro($sql, ["token" => $token]);
+    }
+
+    static public function updatePasswordByToken($token, $newPassword)
+    {
+        if (!\Utilities\Validators::IsValidPassword($newPassword)) return false;
+
+        $hashedPassword = self::_hashPassword($newPassword);
+        $sql = "UPDATE usuario 
+                SET userpswd = :userpswd, 
+                    userpswdchg = NOW(), 
+                    userrecoverytoken = NULL, 
+                    userrecoveryexpira = NULL 
+                WHERE userrecoverytoken = :token";
+
+        return self::executeNonQuery($sql, [
+            "userpswd" => $hashedPassword,
+            "token" => $token
+        ]) > 0;
+    }
+
 }
 
 ?>

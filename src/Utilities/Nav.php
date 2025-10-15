@@ -22,7 +22,9 @@ class Nav
             $userID = Security::getUserId();
             $navigationData = self::getNavFromJson()["private"];
             foreach ($navigationData as $navEntry) {
-                if (Security::isAuthorized($userID, $navEntry["id"], 'MNU')) {
+                // Permitir siempre las opciones de edición de usuario sin verificar permisos
+                if ($navEntry["id"] === "Menu_User_Edit" || $navEntry["id"] === "Menu_Password_Edit" || 
+                    Security::isAuthorized($userID, $navEntry["id"], 'MNU')) {
                     // 🔁 Replace {userId} with the actual logged-in user ID
                     if (isset($navEntry["nav_url"])) {
                         $navEntry["nav_url"] = str_replace("{userid}", $userID, $navEntry["nav_url"]);

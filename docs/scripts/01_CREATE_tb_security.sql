@@ -11,6 +11,8 @@ CREATE TABLE
         `useractcod` varchar(128) DEFAULT NULL,
         `userpswdchg` varchar(128) DEFAULT NULL,
         `usertipo` char(3) DEFAULT NULL COMMENT 'Tipo de Usuario, Normal, Consultor o Cliente',
+        `userrecoverytoken` varchar(128) DEFAULT NULL,         --  Token de recuperación
+        `userrecoveryexpira` datetime DEFAULT NULL, 
         PRIMARY KEY (`usercod`),
         UNIQUE KEY `useremail_UNIQUE` (`useremail`),
         KEY `usertipo` (
@@ -20,6 +22,7 @@ CREATE TABLE
             `userest`
         )
     ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8;
+
 
 CREATE TABLE
     `roles` (

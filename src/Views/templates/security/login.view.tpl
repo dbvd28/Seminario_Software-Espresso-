@@ -5,7 +5,11 @@
       <img src="public/imgs/hero/coffeeshop.jpg" alt="Coffee Shop" />
     </div>
 
-    <form class="login-form" method="post" action="index.php?page=sec_login{{if redirto}}&redirto={{redirto}}{{endif redirto}}">
+    {{if resetSuccess}}
+      <div class="success-message">{{resetSuccess}}</div>
+    {{endif resetSuccess}}
+
+    <form class="login-form" method="post" action="index.php?page=Client/Sec/Login{{if redirto}}&redirto={{redirto}}{{endif redirto}}">
       <h2>Iniciar Sesión</h2>
 
       <label for="txtEmail">Correo Electrónico</label>
@@ -26,6 +30,10 @@
 
       <div class="btn-container">
         <button class="btn-login" id="btnLogin" type="submit">Iniciar Sesión</button>
+      </div>
+
+      <div class="olvide-password">
+        <a href="index.php?page=Client/RecoverPassword">¿Olvidaste tu contraseña?</a>
       </div>
     </form>
   </div>

@@ -1,0 +1,30 @@
+/* Shipping animation styles */
+.shipping-anim{position:relative;overflow:hidden;height:180px;border-radius:12px;background:linear-gradient(#a9d8ff,#e6f5ff);box-shadow:0 6px 16px rgba(0,0,0,.12);margin:16px 0}
+.shipping-anim__sky{position:absolute;inset:0}
+.shipping-anim__cloud{position:absolute;top:18px;width:100px;height:34px;background:#fff;border-radius:34px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.08))}
+.shipping-anim__cloud::before,.shipping-anim__cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.shipping-anim__cloud::before{width:44px;height:44px;left:10px;top:-16px}
+.shipping-anim__cloud::after{width:60px;height:60px;left:42px;top:-28px}
+.shipping-anim__cloud.c1{left:-120px;animation:cloud-move 22s linear infinite}
+.shipping-anim__cloud.c2{left:-220px;top:44px;transform:scale(.9);opacity:.8;animation:cloud-move 28s linear infinite}
+@keyframes cloud-move{0%{transform:translateX(0)}100%{transform:translateX(160%)} }
+
+.shipping-anim__road{position:absolute;left:0;right:0;bottom:28px;height:54px;background:linear-gradient(#4e4e4e,#2f2f2f)}
+.shipping-anim__lane{position:absolute;left:-40%;right:-40%;top:50%;height:4px;background:repeating-linear-gradient(90deg,transparent 0 24px,#ffd66b 24px 64px);transform:translateY(-50%);opacity:.9;animation:lane-move 1.1s linear infinite}
+@keyframes lane-move{0%{transform:translate(-10%, -50%)}100%{transform:translate(10%, -50%)} }
+
+.shipping-anim__truck{position:absolute;bottom:54px;left:-180px;width:160px;height:70px;animation:truck-move 6.5s ease-in-out infinite}
+@keyframes truck-move{0%{transform:translateX(0)}50%{transform:translateX(calc(100vw - 60px))}100%{transform:translateX(0)}}
+.truck__cabin{position:absolute;left:0;bottom:18px;width:62px;height:38px;background:#ff6b6b;border-radius:6px 6px 2px 2px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+.truck__cabin::after{content:"";position:absolute;right:6px;top:6px;width:22px;height:14px;background:#b3e5ff;border-radius:2px}
+.truck__box{position:absolute;left:58px;bottom:18px;width:92px;height:46px;background:#ffd66b;border-radius:4px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.truck__wheel{position:absolute;bottom:6px;width:22px;height:22px;background:#1f1f1f;border-radius:50%;box-shadow:inset 0 0 0 4px #444, inset 0 0 0 6px #888}
+.truck__wheel.w1{left:20px;animation:wheel 1s linear infinite}
+.truck__wheel.w2{left:104px;animation:wheel 1s linear infinite}
+@keyframes wheel{to{transform:rotate(360deg)}}
+
+/* Responsive */
+@media (max-width:768px){
+  .shipping-anim{height:160px}
+  .shipping-anim__truck{width:140px}
+}

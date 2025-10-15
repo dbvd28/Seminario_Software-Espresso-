@@ -23,7 +23,7 @@ class Products extends Table
         return self::executeNonQuery($sql, $data);
     }
 
-    public static function update(int $id, string $nombre,string $dsc,float $prc,int $stc,string $est,int $prov,int $cat): bool
+    public static function update(int $id, string $nombre, string $dsc, float $prc, int $stc, string $est, int $prov, int $cat): bool
     {
         $sql = "UPDATE productos SET
                     productName = :productName,
@@ -34,41 +34,52 @@ class Products extends Table
                     proveedorId=:proveedorId,
                     categoriaId=:categoriaId
                 WHERE productId = :productId";
-        $params=[
-            "productId"=>$id,
-            "productName"=>$nombre,
-            "productDescription"=>$dsc,
-            "productPrice"=>$prc,
-            "productStock"=>$stc,
-            "productStatus"=>$est,
-            "proveedorId"=>$prov,
-            "categoriaId"=>$cat
+        $params = [
+            "productId" => $id,
+            "productName" => $nombre,
+            "productDescription" => $dsc,
+            "productPrice" => $prc,
+            "productStock" => $stc,
+            "productStatus" => $est,
+            "proveedorId" => $prov,
+            "categoriaId" => $cat
         ];
-        return self::executeNonQuery($sql,$params );
+        return self::executeNonQuery($sql, $params);
     }
-     public static function newProduct( string $nombre,string $dsc,float $prc,int $stc,string $est,int $prov,int $cat)
+    public static function updateProductImage(int $id, string $path)
+    {
+        $sql = "UPDATE productos SET
+                    productImgUrl = :productImgUrl 
+                    WHERE productId=:productId";
+        $params = [
+            "productId" => $id,
+            "productImgUrl" => $path
+        ];
+        return self::executeNonQuery($sql,$params);
+    }
+    public static function newProduct(string $nombre, string $dsc, float $prc, int $stc, string $est, int $prov, int $cat,string $path)
     {
         $sqlstr = "INSERT INTO productos (productName,productDescription, productPrice,productImgUrl,productStock, productStatus, proveedorId,categoriaId) 
         values (:productName,:productDescription,:productPrice,:productImgUrl,:productStock,:productStatus,:proveedorId,:categoriaId);";
         return self::executeNonQuery(
             $sqlstr,
             [
-            "productName"=>$nombre,
-            "productDescription"=>$dsc,
-            "productPrice"=>$prc,
-            "productImgUrl"=>"",
-            "productStock"=>$stc,
-            "productStatus"=>$est,
-            "proveedorId"=>$prov,
-            "categoriaId"=>$cat
+                "productName" => $nombre,
+                "productDescription" => $dsc,
+                "productPrice" => $prc,
+                "productImgUrl" => $path,
+                "productStock" => $stc,
+                "productStatus" => $est,
+                "proveedorId" => $prov,
+                "categoriaId" => $cat
             ]
         );
     }
-         public static function getAllProv(): array
+    public static function getAllProv(): array
     {
         return self::obtenerRegistros("SELECT * FROM proveedores", []);
     }
-     public static function getAllCat(): array
+    public static function getAllCat(): array
     {
         return self::obtenerRegistros("SELECT * FROM categorias", []);
     }

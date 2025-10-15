@@ -3,49 +3,46 @@
 namespace Controllers\Administrator;
 
 use Controllers\PrivateController;
-use Dao\Administrator\Orders as ODAO;
+use Controllers\PublicController;
+use Dao\Administrator\Category as CDAO;
 use Views\Renderer;
-
 use Utilities\Site;
 use Utilities\Validators;
 
-const LIST_URL = "index.php?page=Administrator-Orders";
+const LIST_URL = "index.php?page=Administrator-Categories";
 
-class Order extends PrivateController
+class Category extends PrivateController
 {
     private array $viewData;
     private array $modes;
     private array $status;
+
     public function __construct()
     {
         parent::__construct();
+
         $this->viewData = [
             "mode" => "",
-            "id" => 0,
-            "fecha" => "2025-08-28",
-            "estado" => "PEND",
-            "nombre" => "",
-            "correo" => "",
-            "total" => "",
-            "productos" => [],
-            "modeDsc" => "",
-            "selectedPEND" => "",
-            "selectedPAG" => "",
-            "selectedENV" => "",
+            "modeDesc" => "",
+            "categoryId" => 0,
+            "categoryName" => "",
+            "categoryDescription" => "",
             "errors" => [],
-            "cancelLabel" => "Cancel",
-            "showConfirm" => true,
-            "readonly" => ""
-        ];
-        $this->modes = [
-            "UPD" => "Updating %s",
-            "DSP" => "Details of %s"
+            "xsrfToken" => ""
         ];
 
-        $this->status = ["ENV", "PAG", "PEND"];
+        $this->errors = [];
+
+        $this->modes = [
+            "INS" => "Nuevo Producto",
+            "UPD" => "Editar Producto",
+            "DSP" => "Detalle de Producto"
+        ];
     }
+
     public function run(): void
     {
+
         $this->getQueryParamsData();
         if ($this->viewData["mode"] !== "INS") {
             $this->getDataFromDB();
@@ -57,19 +54,14 @@ class Order extends PrivateController
             }
         }
         $this->prepareViewData();
-        // Include base styles and progress bar
-        Site::addLink("public/css/order.css");
-        Site::addLink("public/css/progress.css");
-        if (isset($this->viewData["showShipping"]) && $this->viewData["showShipping"] === true) {
-            Site::addLink("public/css/shipping.css");
-        }
-        Renderer::render("Administrator/Order", $this->viewData);
+        Site::addLink("public/css/invproduct.css");
+        Renderer::render("Administrator/category", $this->viewData);
     }
 
     private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
-            error_log(sprintf("%s - %s", $this->name, $this->$logMessage));
+            error_log(sprintf("%s - %s", $this->name, $logMessage));
         }
         Site::redirectToWithMsg(LIST_URL, $message);
     }
@@ -110,44 +102,24 @@ class Order extends PrivateController
                     "Attempt to load controler with  wrong value on query parameter ID - " . $_GET["id"]
                 );
             }
-            $this->viewData["id"] = intval($_GET["id"]);
+            $this->viewData["categoryId"] = intval($_GET["id"]);
         }
     }
 
     private function getDataFromDB()
     {
-        $tmpPedido = ODAO::getOrdersById(
-            $this->viewData["id"]
+        $tmpCategoria = CDAO::getById(
+            intval($this->viewData["categoryId"])
         );
-        if ($tmpPedido && count($tmpPedido) > 0) {
-            $this->viewData["fecha"] = $tmpPedido["fchpedido"];
-            $this->viewData["estado"] = $tmpPedido["estado"];
-            $this->viewData["nombre"] = $tmpPedido["username"];
-            $this->viewData["correo"] = $tmpPedido["useremail"];
-            $this->viewData["total"] = $tmpPedido["total"];
+        if ($tmpCategoria && count($tmpCategoria) > 0) {
+            $this->viewData["categoryName"] = $tmpCategoria["nombre"];
+            $this->viewData["categoryDescription"] = $tmpCategoria["descripcion"];
         } else {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Record for id " . $this->viewData["id"] . " not found."
             );
         }
-        $tmpProductos = ODAO::getProductsOrders(
-            $this->viewData["id"]
-        );
-        if (is_array($tmpProductos)) {
-            foreach ($tmpProductos as &$producto) {
-                $cantidad = (float) $producto["cantidad"];
-                $precio = (float) $producto["precio_unitario"];
-                $producto["subtotal"] = number_format($cantidad * $precio, 2, '.', '');
-            }
-            $this->viewData["productos"] = $tmpProductos;
-        } else {
-            $this->throwError(
-                "Something went wrong, try again.",
-                "Products not found for this order."
-            );
-        }
-
     }
 
     private function getBodyData()
@@ -158,28 +130,17 @@ class Order extends PrivateController
                 "Trying to post without parameter ID on body"
             );
         }
-         if (!isset($_POST["date"])) {
+        if (!isset($_POST["nombre"])) {
             $this->throwError(
-                "Something went wrong, try again.",
+                "Something went wrong, try ag
+                ain.",
                 "Trying to post without parameter DATE on body"
             );
         }
-         if (!isset($_POST["client"])) {
-            $this->throwError(
-                "Something went wrong, try again.",
-                "Trying to post without parameter CLIENT on body"
-            );
-        }
-         if (!isset($_POST["email"])) {
+        if (!isset($_POST["descripcion"])) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post without parameter EMAIL on body"
-            );
-        }
-         if (!isset($_POST["status"])) {
-            $this->throwError(
-                "Something went wrong, try again.",
-                "Trying to post without parameter STATUS on body"
             );
         }
         if (!isset($_POST["xsrtoken"])) {
@@ -188,7 +149,7 @@ class Order extends PrivateController
                 "Trying to post without parameter XSRTOKEN on body"
             );
         }
-        if (intval($_POST["id"]) !== $this->viewData["id"]) {
+        if (intval($_POST["id"]) !== $this->viewData["categoryId"]) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post with inconsistent parameter ID value has: " . $this->viewData["id"] . " recieved: " . $_POST["id"]
@@ -200,23 +161,15 @@ class Order extends PrivateController
                 "Trying to post with inconsistent parameter XSRToken value has: " . $_SESSION[$this->name . "-xsrtoken"] . " recieved: " . $_POST["xsrtoken"]
             );
         }
-        $this->viewData["fecha"] = $_POST["date"];
-        $this->viewData["estado"] = $_POST["status"];
-        $this->viewData["nombre"] = $_POST["client"];
-        $this->viewData["correo"] = $_POST["email"];
-        $this->viewData["total"] = $_POST["total"];
-
+        $this->viewData["categoryName"] = $_POST["nombre"];
+        $this->viewData["categoryDescription"] = $_POST["descripcion"];
     }
 
     private function validateData(): bool
     {
-        if (Validators::IsEmpty($this->viewData["estado"])) {
-            $this->innerError("estado", "This field is required.");
+        if (Validators::IsEmpty($this->viewData["categoryName"])) {
+            $this->innerError("categoryName", "This field is required.");
         }
-        if (!in_array($this->viewData["estado"], $this->status)) {
-            $this->innerError("estado", "This field is required.");
-        }
-
         return !(count($this->viewData["errors"]) > 0);
     }
 
@@ -224,16 +177,29 @@ class Order extends PrivateController
     {
         $mode = $this->viewData["mode"];
         switch ($mode) {
-            case "UPD":
+            case "INS":
                 if (
-                    ODAO::updateOrderStatus(
-                        $this->viewData["id"],
-                        $this->viewData["estado"]
+                    CDAO::insert(
+                        $this->viewData["categoryName"],
+                        $this->viewData["categoryDescription"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Order updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Categorycreated successfuly");
                 } else {
-                    $this->innerError("global", "Something wrong happend while updating the Order.");
+                    $this->innerError("global", "Something wrong happend to save the new Category.");
+                }
+                break;
+            case "UPD":
+                if (
+                    CDAO::update(
+                        intval($this->viewData["categoryId"]),
+                        $this->viewData["categoryName"],
+                        $this->viewData["categoryDescription"],
+                    ) > 0
+                ) {
+                    Site::redirectToWithMsg(LIST_URL, "Category updated successfuly");
+                } else {
+                    $this->innerError("global", "Something wrong happend while updating the Category.");
                 }
                 break;
         }
@@ -260,15 +226,5 @@ class Order extends PrivateController
         $this->viewData["timestamp"] = time();
         $this->viewData["xsrtoken"] = hash("sha256", json_encode($this->viewData));
         $_SESSION[$this->name . "-xsrtoken"] = $this->viewData["xsrtoken"];
-
-        // Progress flags and shipping visibility
-        $estado = $this->viewData["estado"];
-        $this->viewData["showShipping"] = ($estado === "ENV");
-        $this->viewData["isPEND"] = ($estado === "PEND");
-        $this->viewData["isPAG"] = ($estado === "PAG");
-        $this->viewData["isENV"] = ($estado === "ENV");
-        $this->viewData["step1"] = true;
-        $this->viewData["step2"] = ($estado === "PAG" || $estado === "ENV");
-        $this->viewData["step3"] = ($estado === "ENV");
     }
 }

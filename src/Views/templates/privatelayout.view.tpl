@@ -25,22 +25,24 @@
       <div class="hmb hrz"></div>
       <div class="hmb dgn pt-2"></div>
     </label>
-   <div class="brand" style="display: flex; align-items:center; gap:12px;">
-    <img src="public/imgs/hero/logo.png" alt="Coffee Logo" class="logo" style="height:40px; width:auto;"/>
-    <h1>{{SITE_TITLE}}</h1>
-  </div>
+    <div class="brand" style="display: flex; align-items:center; gap:12px;">
+      <img src="public/imgs/hero/logo.png" alt="Coffee Logo" class="logo" style="height:40px; width:auto;" />
+      <h1>{{SITE_TITLE}}</h1>
+    </div>
     <nav id="menu" style="background-color: #9c653d;">
       <ul>
         <li><a href="index.php?page={{PRIVATE_DEFAULT_CONTROLLER}}"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
         {{foreach NAVIGATION}}
-            <li><a href="{{nav_url}}">{{nav_label}}</a></li>
+        <li><a href="{{nav_url}}">{{nav_label}}</a></li>
         {{endfor NAVIGATION}}
         <li><a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
       </ul>
     </nav>
-   <span>{{if ~CART_ITEMS}}<a href="index.php?page=Checkout-Checkout"><i class="fa-solid fa-cart-shopping" style="color:white;"></i></a></a>{{~CART_ITEMS}}{{endif ~CART_ITEMS}}</span>
+    <span>{{if ~CART_ITEMS}}<a href="index.php?page=Checkout-Checkout"><i class="fa-solid fa-cart-shopping"
+          style="color:white;"></i></a></a>{{~CART_ITEMS}}{{endif ~CART_ITEMS}}</span>
     {{with login}}
-    <span class="username">{{userName}} <a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i></a></span>
+    <span class="username">{{userName}} <a href="index.php?page=sec_logout"><i
+          class="fas fa-sign-out-alt"></i></a></span>
     {{endwith login}}
   </header>
   <main style="flex:1;">
@@ -48,9 +50,13 @@
   </main>
   <footer style="background-color: #9c653d;">
     <div>Todo los Derechos Reservados {{~CURRENT_YEAR}} &copy;</div>
+    <h4>Informacion</h4>
+    <a href="index.php?page=Ubicaciones">Encontrá tu Local Más Cercano</a>
+    <a href="index.php?page=Eventos">Proximos Eventos</a>
   </footer>
   {{foreach EndScripts}}
   <script src="{{~BASE_DIR}}/{{this}}"></script>
   {{endfor EndScripts}}
 </body>
+
 </html>

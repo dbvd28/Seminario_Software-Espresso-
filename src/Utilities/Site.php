@@ -18,7 +18,7 @@ class Site
             $pageRequest = Context::getContextByKey("PRIVATE_DEFAULT_CONTROLLER");
         }
         if (isset($_GET["page"])) {
-            $pageRequest = str_replace(array("_", "-", "."), "\\", $_GET["page"]);
+            $pageRequest = str_replace(array("_", "-", ".","/"), "\\", $_GET["page"]);
         }
         Context::setArrayToContext($_GET);
         Context::setContext("request_uri", $_SERVER["REQUEST_URI"]);

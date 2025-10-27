@@ -51,7 +51,7 @@ class Ubicaciones extends PublicController
             }
         }
         
-        Site::addLink("public/css/ubicaciones.css"); 
+        Site::addLink("public/css/ubicacion.css"); 
         
         // Renderizado estático
         \Views\Renderer::render('ubicaciones', $viewData);

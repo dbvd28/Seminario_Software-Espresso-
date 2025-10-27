@@ -4,6 +4,7 @@ namespace Controllers\Administrator;
 
 use Controllers\PrivateController;
 use Dao\Administrator\Quejas as QuejasDao;
+use Utilities\Site;
 use Views\Renderer;
 
 class Quejas extends PrivateController
@@ -26,6 +27,7 @@ class Quejas extends PrivateController
         // error_log("DEBUG QUEJAS: " . print_r($this->viewData["quejas"], true));
 
         // Renderizar vista
+        Site::addLink("public/css/quejas.css");
         Renderer::render("Administrator/quejas", $this->viewData);
     }
 

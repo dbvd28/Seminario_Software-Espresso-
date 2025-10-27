@@ -4,6 +4,7 @@ namespace Controllers\Client;
 
 use Controllers\PrivateController;
 use Dao\Client\Quejas as QuejasDao;
+use Utilities\Site;
 use Views\Renderer;
 
 class Quejas extends PrivateController
@@ -23,7 +24,7 @@ class Quejas extends PrivateController
             $this->viewData["success"] = true;
             $this->viewData["successMsg"] = isset($_GET['msg']) ? $_GET['msg'] : "Operación realizada con éxito";
         }
-        
+        Site::addLink("public/css/quejasuser.css");
         Renderer::render('Client/quejas', $this->viewData);
     }
 

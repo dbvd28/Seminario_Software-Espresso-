@@ -36,18 +36,8 @@
       "id": "Menu_Administrator_Suppliers",
       "nav_url": "index.php?page=Administrator-Suppliers",
       "nav_label": "<i class=\"fas fa-desktop\"></i>&nbsp;Administrador de Proveedores"
-    },
-    {
-      "id": "Menu_Client_Orders",
-      "nav_url": "index.php?page=Client-Orders",
-      "nav_label": "<i class=\"fa-solid fa-box\"></i>&nbsp;Mis pedidos"
     }
     ,
-       {
-      "id": "Menu_Username",
-      "nav_url": "index.php?page=Client-user&mode=UPD&id={userid}",
-      "nav_label":"<i class=\"fas fa-pencil-alt\"></i>&nbsp;Cambiar nombre"
-    },
     {
       "id":"Menu_Client_Orders",
       "nav_url": "index.php?page=Client_Orders",

@@ -1,0 +1,185 @@
+body {
+  background-color: #f9f7f7 !important;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.ubicaciones-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: transparent;
+  border-radius: 12px;
+}
+
+main h1 {
+  color: #333333;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  /* Más espacio debajo del título principal */
+  font-weight: 700;
+}
+
+/* 2. CONTENEDOR PRINCIPAL PARA EL LAYOUT DE 2 COLUMNAS */
+.main-content-layout {
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite que las columnas se apilen en móvil */
+  gap: 30px;
+  /* Espacio entre las dos grandes secciones */
+}
+
+/* 3. SECCIONES SIN EFECTO TARJETA (Integradas al body) */
+.mapa-local-section,
+.contacto-form-section {
+  flex: 1;
+  /* Distribuye el espacio equitativamente */
+  min-width: 300px;
+  /* Asegura que no se colapsen demasiado */
+  margin-bottom: 40px;
+  padding: 0;
+  /* Eliminamos el padding y la sombra de la sección contenedora */
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.mapa-local-section h2,
+.contacto-form-section h2 {
+  color: #6f4e37;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+/* Estilos de la lista de locales (contenedores de mapas) */
+.mapas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 4. TARJETA INDIVIDUAL (Mantenemos la tarjeta para cada mapa) */
+.local-card {
+  flex: 1 1 100%;
+  /* ¡ACTUALIZADO! Ocupa el 100% del ancho para que el mapa se vea más grande */
+  min-width: 250px;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.local-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.local-card h3 {
+  color: #4b3832;
+  margin-top: 0;
+  font-size: 1.3em;
+  margin-bottom: 8px;
+}
+
+.map-placeholder {
+  margin: 15px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dcdcdc;
+}
+
+.mapa-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: #6f4e37;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s;
+}
+
+.mapa-link:hover {
+  background-color: #8d6e57;
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444444;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #ffffff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #6f4e37;
+  outline: none;
+  box-shadow: 0 0 8px rgba(111, 78, 55, 0.4);
+}
+
+/* Estilo del botón 'Enviar Mensaje' */
+.btn.primary {
+  background-color: #6f4e37;
+  color: white;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.15em;
+  font-weight: 700;
+  transition: background-color 0.3s, transform 0.1s;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn.primary:hover {
+  background-color: #8d6e57;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+  .main-content-layout {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .ubicaciones-container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .local-card {
+    flex: 1 1 100%;
+  }
+}

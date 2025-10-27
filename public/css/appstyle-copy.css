@@ -968,7 +968,7 @@ footer {
 }
 
 .footer-columna-informacion {
-  text-align: right;
+  text-align: center;
 }
 
 .footer-columna-informacion h4 {
@@ -976,7 +976,7 @@ footer {
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #ffd8a8; /* Beige cálido */
+  color: #faf8f5; /* Beige cálido */
 }
 
 .footer-columna-informacion a {
@@ -990,7 +990,7 @@ footer {
 
 /* Hover efecto elegante */
 .footer-columna-informacion a:hover {
-  color: #ffe0b2;
+  color: #f8f5f0;
   transform: translateX(4px);
 }
 
@@ -1221,9 +1221,9 @@ a:focus {
   outline-style: none;
 }
 
-a:visited {
+/*a:visited {
   color: #000;
-}
+}*/
 
 a.w48 {
   width: 3rem;

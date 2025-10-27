@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{BASE_DIR}}/public/css/ubicaciones.css" />
+
 <div class="ubicaciones-container">
     <h1>{{page_title}}</h1>
 

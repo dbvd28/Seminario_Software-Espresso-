@@ -9,6 +9,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{BASE_DIR}}/public/css/appstyle-copy.css" />
   <script src="https://kit.fontawesome.com/{{FONT_AWESOME_KIT}}.js" crossorigin="anonymous"></script>
+  <style>
+    /* Submenús colapsables en navegación privada */
+    nav#menu ul li.submenu > ul.submenu-items { display: none !important; }
+    nav#menu ul li.submenu.open > ul.submenu-items { display: block !important; }
+    nav#menu ul li.submenu > ul.submenu-items { flex-direction: column; padding-left: 0; }
+    nav#menu ul li.submenu > .submenu-toggle { cursor: pointer; display: inline-flex; align-items: center; gap: 6px; pointer-events: auto; justify-content: flex-start; width: 100%; position: relative; }
+    nav#menu ul li.submenu > .submenu-toggle .chevron { 
+        transition: transform 0.2s ease, opacity 0.2s ease; 
+        position: absolute;
+        right: 8px;
+        opacity: 0.85;
+        display: inline-block !important;
+    }
+    /* Flechita CSS pura */
+    nav#menu ul li.submenu > .submenu-toggle .chevron:before {
+        content: "▼";
+        font-size: 12px;
+        display: inline-block;
+        color: inherit;
+    }
+    nav#menu ul li.submenu.open > .submenu-toggle .chevron { transform: rotate(180deg); opacity: 1; }
+  </style>
   {{foreach SiteLinks}}
   <link rel="stylesheet" href="{{~BASE_DIR}}/{{this}}" />
   {{endfor SiteLinks}}
@@ -32,9 +54,33 @@
     <nav id="menu" style="background-color: #9c653d;">
       <ul>
         <li><a href="index.php?page={{PRIVATE_DEFAULT_CONTROLLER}}"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
-        {{foreach NAVIGATION}}
-        <li><a href="{{nav_url}}">{{nav_label}}</a></li>
-        {{endfor NAVIGATION}}
+
+        {{if ~IS_ADMIN_MODE}}
+        <li class="submenu" id="submenu-admin">
+          <span class="submenu-toggle" role="button" tabindex="0" aria-controls="submenu-admin-items" onclick="this.parentElement.classList.toggle('open'); this.setAttribute('aria-expanded', this.parentElement.classList.contains('open') ? 'true' : 'false');"><i class="fas fa-cogs"></i>&nbsp;Administrar <span class="chevron"></span></span>
+          <ul class="submenu-items" id="submenu-admin-items">
+            {{foreach NAV_ADMIN}}
+            <li><a href="{{nav_url}}">{{nav_label}}</a></li>
+            {{endfor NAV_ADMIN}}
+          </ul>
+        </li>
+        {{endif ~IS_ADMIN_MODE}}
+
+        {{if ~IS_USER_MODE}}
+          {{foreach NAV_USER}}
+          <li><a href="{{nav_url}}">{{nav_label}}</a></li>
+          {{endfor NAV_USER}}
+        {{endif ~IS_USER_MODE}}
+
+        <li class="submenu" id="submenu-edit">
+          <span class="submenu-toggle" role="button" tabindex="0" aria-controls="submenu-edit-items" onclick="this.parentElement.classList.toggle('open'); this.setAttribute('aria-expanded', this.parentElement.classList.contains('open') ? 'true' : 'false');"><i class="fas fa-user-cog"></i>&nbsp;Editar perfil <span class="chevron"></span></span>
+          <ul class="submenu-items" id="submenu-edit-items">
+            {{foreach NAV_EDIT}}
+            <li><a href="{{nav_url}}">{{nav_label}}</a></li>
+            {{endfor NAV_EDIT}}
+          </ul>
+        </li>
+
         <li><a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
       </ul>
     </nav>
@@ -63,6 +109,35 @@
   {{foreach EndScripts}}
   <script src="{{~BASE_DIR}}/{{this}}"></script>
   {{endfor EndScripts}}
+  <script>
+    // Toggle de submenús colapsables con delegación de eventos (más robusto)
+    (function(){
+      var nav = document.querySelector('nav#menu');
+      if (!nav) return;
+      function toggle(li){
+        if (!li) return;
+        li.classList.toggle('open');
+        var isOpen = li.classList.contains('open');
+        var btn = li.querySelector('.submenu-toggle');
+        if (btn) { btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); }
+      }
+      nav.addEventListener('click', function(e){
+        var btn = e.target.closest('.submenu-toggle');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        toggle(btn.parentElement);
+      });
+      nav.addEventListener('keydown', function(e){
+        var btn = e.target.closest('.submenu-toggle');
+        if (!btn) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle(btn.parentElement);
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>

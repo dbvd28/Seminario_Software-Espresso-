@@ -64,6 +64,16 @@
     color: #f0f0f0;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
+.categoria-titulo {
+    font-size: 2em;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
 </style>
 
 <section class="hero-modern" id="hero-carousel">
@@ -87,28 +97,36 @@
 </section>
 
 <section>
-  </h1><div class="product-list">
-  {{foreach productos}}
-  <div class="product-card" data-productId="{{productId}}">
-    <div class="product-image">
-      <img src="{{productImgUrl}}" alt="{{productName}}">
-      <div class="price-tag">${{productPrice}}</div>
-      <div class="stock-tag">Disponible {{productStock}}</div>
-    </div>
-    <div class="product-info">
-      <h2>{{productName}}</h2>
-      <p>{{productDescription}}</p>
-      <form action="index.php?page=index" method="post">
-        <input type="hidden" name="productId" value="{{productId}}">
-        <button type="submit" name="addToCart" class="add-to-cart">
-          <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
-        </button>
-      </form>
-    </div>
-  </div>
-  {{endfor productos}}
-</div>
- </section>
+
+    {{foreach productosPorCategoria}}
+        <!-- Mostrar el nombre de la categoría -->
+        <h2 class="categoria-titulo">{{nombre}}</h2>
+        
+        <!-- Lista de productos en esta categoría -->
+        <div class="product-list">
+            {{foreach productos}}
+                <div class="product-card" data-productId="{{productId}}">
+                    <div class="product-image">
+                        <img src="{{productImgUrl}}" alt="{{productName}}">
+                        <div class="price-tag">${{productPrice}}</div>
+                        <div class="stock-tag">Disponible {{productStock}}</div>
+                    </div>
+                    <div class="product-info">
+                        <h2>{{productName}}</h2>
+                        <p>{{productDescription}}</p>
+                        <!-- Eliminé la línea de {{categoriaId}} ya que ahora se muestra en el título de la categoría -->
+                        <form action="index.php?page=index" method="post">
+                            <input type="hidden" name="productId" value="{{productId}}">
+                            <button type="submit" name="addToCart" class="add-to-cart">
+                                <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {{endfor productos}}
+        </div>
+    {{endfor productosPorCategoria}}
+</section>
 
 <section class="info-panel-full">
   <div class="info-card-full">

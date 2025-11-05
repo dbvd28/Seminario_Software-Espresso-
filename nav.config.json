@@ -41,7 +41,7 @@
     {
       "id":"Menu_Client_Orders",
       "nav_url": "index.php?page=Client_Orders",
-      "nav_label": "<i class=\"fas fa-box\"></i>&nbsp;Mis Pedidos"
+      "nav_label": "<i class=\"fas fa-clipboard-list\"></i>&nbsp;Pedidos"
     },
     {
       "id":"Menu_Client_Quejas",

@@ -3,23 +3,22 @@
   margin: 40px auto;
   padding: 20px;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f8f5f2;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-
 .container h1 {
   margin-bottom: 20px;
   font-size: 28px;
-  color: #333;
+  color: #4b2e2e;
 }
 
 .btn.new {
   display: inline-block;
   margin-bottom: 20px;
   padding: 10px 16px;
-  background-color: #28a745;
+  background-color: #a47148;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -27,7 +26,7 @@
 }
 
 .btn.new:hover {
-  background-color: #218838;
+  background-color: #8d5c36;
 }
 
 /* Tabla */
@@ -39,10 +38,9 @@ table {
   overflow: hidden;
 }
 
-
 table thead {
-  background-color: #007bff;
-  color: white;
+  background-color: #e7d7c9;
+  color: #4b2e2e;
 }
 
 table th,
@@ -53,13 +51,13 @@ table td {
 }
 
 table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f8f5f2;
 }
 
 .btn.edit {
-  background-color: #ffc107;
+  background-color: #4b2e2e;
   padding: 10px 20px;
-  color: #212529;
+  color: white;
   text-decoration: none;
   border-radius: 8px;
   transition: background-color 0.3s;
@@ -67,5 +65,5 @@ table tbody tr:nth-child(even) {
 }
 
 .btn.edit:hover {
-  background-color: #e0a800;
+  background-color: #37211f;
 }

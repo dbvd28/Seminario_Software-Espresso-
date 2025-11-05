@@ -32,13 +32,15 @@ abstract class PublicController implements IController
         \Utilities\Nav::setPublicNavContext();
         if (\Utilities\Security::isLogged()){
             $layoutFile = \Utilities\Context::getContextByKey("PRIVATE_LAYOUT");
-            if ($layoutFile !== "") {
-                \Utilities\Context::setContext(
-                    "layoutFile",
-                    $layoutFile
-                );
-                \Utilities\Nav::setNavContext();
+            if ($layoutFile === "") {
+                // Fallback al layout privado por defecto si no está configurado en env
+                $layoutFile = "privatelayout.view.tpl";
             }
+            \Utilities\Context::setContext(
+                "layoutFile",
+                $layoutFile
+            );
+            \Utilities\Nav::setNavContext();
         }
     }
     /**

@@ -1,0 +1,84 @@
+.recover-wrapper {
+    min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recover-container {
+  max-width: 500px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.recover-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.recover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.recover-title {
+  text-align: center;
+  color: #4b2e2e;
+  margin-bottom: 24px;
+}
+
+.recover-label {
+  font-weight: 600;
+  margin: 12px 0 6px;
+  color: #5a3c2d;
+}
+
+.recover-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f4f1ee;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+  width: 100%; 
+}
+
+.recover-button {
+  background-color: #a47148;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.recover-error-email,
+.recover-global-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 6px;
+}
+
+.recover-success-message {
+  color: #0f9d58;
+  background-color: #e6f4ea;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 6px;
+}

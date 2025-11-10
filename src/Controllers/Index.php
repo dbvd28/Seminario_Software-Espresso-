@@ -68,10 +68,28 @@ class Index extends PublicController
             $this->getCartCounter();
         }
         $this->getCartCounter();
-        $products = Cart::getProductosDisponibles();
+        
+        // Obtener productos con sus categorías
+        $productos = Producto::getProductosConCategorias();
+
+        // Agrupar productos por categoría
+        $productosPorCategoria = [];
+        foreach ($productos as $producto) {
+            $categoriaId = $producto['categoriaId'] ?? 0;
+            if (!isset($productosPorCategoria[$categoriaId])) {
+                $productosPorCategoria[$categoriaId] = [
+                    'nombre' => $producto['categoriaNombre'] ?? 'Sin categoría',
+                    'productos' => []
+                ];
+            }
+            $productosPorCategoria[$categoriaId]['productos'][] = $producto;
+        }
+
+        // Pasar a la vista
         $this->viewData = [
-            "productos" => $products,
+            "productosPorCategoria" => $productosPorCategoria,
         ];
+
         \Views\Renderer::render("index", $this->viewData);
     }
 }

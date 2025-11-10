@@ -99,7 +99,7 @@ class Category extends PrivateController
             if (!is_numeric($_GET["id"])) {
                 $this->throwError(
                     "Something went wrong, try again.",
-                    "Attempt to load controler with  wrong value on query parameter ID - " . $_GET["id"]
+                    "Attempt to load controller with  wrong value on query parameter ID - " . $_GET["id"]
                 );
             }
             $this->viewData["categoryId"] = intval($_GET["id"]);
@@ -206,9 +206,6 @@ class Category extends PrivateController
     }
     private function prepareViewData()
     {
-
-        $this->viewData['selected' . $this->viewData["estado"]] = "selected";
-
         if (count($this->viewData["errors"]) > 0) {
             foreach ($this->viewData["errors"] as $scope => $errorsArray) {
                 $this->viewData["errors_" . $scope] = $errorsArray;

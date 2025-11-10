@@ -1,13 +1,26 @@
-<h2>¿Olvidaste tu contraseña?</h2>
+<link rel="stylesheet" href="public/css/recoverpass.css">
 
-<form method="POST" class="recover-form">
-  <label for="email">Correo electrónico:</label>
-  <input type="email" name="email" id="email" value="{{email}}" required>
+<section class="recover-wrapper">
+  <div class="recover-container">
 
-  <div class="error-message">{{errorEmail}}</div>
+    <div class="recover-image">
+      <img src="public/imgs/hero/coffeeshop.jpg" alt="Coffee Shop" />
+    </div>
 
-  <button type="submit">Enviar enlace</button>
-</form>
+    <h2 class="recover-title">¿Olvidaste tu contraseña?</h2>
 
-<div class="success-message">{{successMessage}}</div>
-<div class="error-message">{{globalError}}</div>
+    <form method="POST" class="recover-form">
+      <label for="email" class="recover-label">Correo electrónico:</label>
+      <input type="email" name="email" id="email" class="recover-input" value="{{email}}" required>
+
+      <div class="recover-error-email  error-message">{{errorEmail}}</div>
+
+    <div class="container-button" style="display: flex; justify-content: center; width: 100%; border: 2px;">
+      <button type="submit" class="recover-button">Enviar enlace</button>
+    </div>
+    </form>
+
+    <div class="recover-success-message success-message">{{successMessage}}</div>
+    <div class="recover-global-error error-message">{{globalError}}</div>
+  </div>
+</section>

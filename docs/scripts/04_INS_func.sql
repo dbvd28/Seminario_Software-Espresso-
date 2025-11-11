@@ -4,6 +4,7 @@ INSERT INTO `funciones` (`fncod`, `fndsc`, `fnest`, `fntyp`) VALUES
 ('Controllers\\Administrator\\Orders\\update', 'Controllers\\Administrator\\Orders\\update', 'ACT', 'FNC'),
 ('Controllers\\Administrator\\Products', 'Controllers\\Administrator\\Products', 'ACT', 'CTR'),
 ('Controllers\\Administrator\\ProductsList', 'Controllers\\Administrator\\ProductsList', 'ACT', 'CTR'),
+('Controllers\\Administrator\\Categories', 'Controllers\\Administrator\\Categories', 'ACT', 'CTR'),
 ('Controllers\\Checkout\\Accept', 'Controllers\\Checkout\\Accept', 'ACT', 'CTR'),
 ('Controllers\\Client\\Order', 'Controllers\\Client\\Order', 'ACT', 'CTR'),
 ('Controllers\\Client\\User', 'Controllers\\Client\\User', 'ACT', 'CTR'),

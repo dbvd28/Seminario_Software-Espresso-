@@ -29,6 +29,12 @@
   background-color: #8d5c36;
 }
 
+/* Contenedor de la tabla para scroll horizontal */
+.table-container {
+  overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+  -webkit-overflow-scrolling: touch; /* Mejora el scroll en dispositivos táctiles (iOS) */
+}
+
 /* Tabla */
 table {
   width: 100%;
@@ -36,6 +42,7 @@ table {
   background-color: white;
   border-radius: 5px;
   overflow: hidden;
+  min-width: 600px; /* Ancho mínimo para evitar que se comprima demasiado */
 }
 
 table thead {
@@ -66,4 +73,67 @@ table tbody tr:nth-child(even) {
 
 .btn.edit:hover {
   background-color: #37211f;
+}
+
+/* Media queries para tabletas (ancho máximo 768px) */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+  
+  .container h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .btn.new {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  table th,
+  table td {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .btn.edit {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* Media queries para celulares (ancho máximo 480px) */
+@media (max-width: 480px) {
+  .container {
+    margin: 10px auto;
+    padding: 10px;
+  }
+  
+  .container h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .btn.new {
+    padding: 6px 10px;
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+  
+  table {
+    min-width: 500px; /* Ajusta si es necesario para evitar compresión excesiva */
+  }
+  
+  table th,
+  table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .btn.edit {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 }

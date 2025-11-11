@@ -11,7 +11,7 @@ class ProductsList extends PrivateController
 {
     public function run(): void
     {
-        Site::addLink("public/css/productslist.css");
+        Site::addLink("public/css/productslist2.css");
         $productos = ProductDAO::getAll();
         $viewData = array();
         $viewData["productos"] = $productos;

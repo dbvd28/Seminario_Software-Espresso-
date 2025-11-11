@@ -91,6 +91,7 @@ class Checkout extends PublicController{
         }
         $viewData["carretilla"] = $finalCarretilla;
         $viewData["total"] = number_format($total, 2);
+        \Utilities\Site::addLink("public/css/carretilla.css");
         \Views\Renderer::render("paypal/checkout", $viewData);
     }
 }

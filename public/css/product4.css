@@ -29,11 +29,13 @@
   animation: fadeInUp 1s ease-out;
 }
 
-.hero-modern-content h1 {
+.hero-modern-content .titulo{
   font-size: 3.5rem;
   margin-bottom: 1rem;
   line-height: 1.2;
-  display: contents;
+  display: block;
+  position: relative;
+  text-shadow: #171717;
 }
 
 .hero-modern-content p {
@@ -99,18 +101,6 @@
     object-fit: cover;
 }
 
-.hero-modern-content h1 {
-    font-size: 4em;
-    color: #ffffff;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.hero-modern-content p {
-    font-size: 1.5em;
-    color: #f0f0f0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
 .product-list {
   display: grid;
  grid-template-columns: repeat(auto-fill,300px);

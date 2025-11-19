@@ -1,0 +1,68 @@
+.resetpass-wrapper {
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resetpass-container {
+  max-width: 500px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.resetpass-title {
+  text-align: center;
+  color: #4b2e2e;
+  margin-bottom: 24px;
+}
+
+.resetpass-label {
+  font-weight: 600;
+  margin: 12px 0 6px;
+  color: #5a3c2d;
+}
+
+.resetpass-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f4f1ee;
+}
+
+.resetpass-button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.resetpass-button {
+  background-color: #a47148;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.resetpass-error-message {
+  color: #b94a48;
+  background-color: #f2dede;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 6px;
+}
+
+.resetpass-success-message {
+  color: #0f9d58;
+  background-color: #e6f4ea;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 6px;
+}

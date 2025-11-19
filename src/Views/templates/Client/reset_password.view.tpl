@@ -1,21 +1,27 @@
-<h2>Restablecer contraseña</h2>
+<link rel="stylesheet" href="public/css/resetpass.css">
 
-{{if showForm}}
-<form method="POST" class="reset-form">
-  <label for="newPassword">Nueva contraseña:</label>
-  <input type="password" name="newPassword" id="newPassword" required>
-  <div class="error-message">{{errorNewPassword}}</div>
+<div class="resetpass-wrapper">
+  <div class="resetpass-container">
+    <h2 class="resetpass-title">Restablecer contraseña</h2>
 
-  <label for="confirmPassword">Confirmar contraseña:</label>
-  <input type="password" name="confirmPassword" id="confirmPassword" required>
-  <div class="error-message">{{errorConfirmPassword}}</div>
+    {{if showForm}}
+    <form method="POST" class="reset-form">
+      <label for="newPassword" class="resetpass-label">Nueva contraseña:</label>
+      <input type="password" name="newPassword" id="newPassword" class="resetpass-input" required>
+      <div class="resetpass-error-message-">{{errorNewPassword}}</div>
 
-  <button type="submit">Actualizar contraseña</button>
-</form>
-{{endif showForm}}
+      <label for="confirmPassword" class="resetpass-label">Confirmar contraseña:</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" class="resetpass-input" required>
+      <div class="resetpass-error-message">{{errorConfirmPassword}}</div>
 
-<div class="success-message">
-  {{if success}}✅ Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión.{{endif success}}
-</div>
+      <div class="resetpass-button-container">
+        <button type="submit" class="resetpass-button">Actualizar contraseña</button>
+      </div>
+    </form>
+    {{endif showForm}}
 
-<div class="error-message">{{globalError}}</div>
+    <div class="resetpass-success-message">
+      {{if success}}✅ Tu contraseña ha sido actualizada correctamente. Ya puedes iniciar sesión.{{endif success}}
+    </div>
+
+    <div class="resetpass-error-message">{{globalError}}</div>

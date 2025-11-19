@@ -2,26 +2,36 @@
   font-family: "Segoe UI", sans-serif;
   background-color: #f8f5f2;
   color: #333;
-  padding: 20px;
-  height: 90vh;
+  padding: 15px;
+  height: auto;
+  min-height: 90vh;
 }
+
 .title {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #4b2e2e;
+  text-align: center;
 }
 
 .tabs {
   margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .tab {
-  padding: 10px 20px;
+  padding: 8px 15px;
   cursor: pointer;
   border-bottom: 3px solid transparent;
   color: #5c3d2e;
   font-weight: bold;
   transition: 0.3s;
+  font-size: 0.9rem;
+  flex: 1;
+  min-width: fit-content;
+  text-align: center;
 }
 
 .tab:hover,
@@ -36,34 +46,136 @@
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Add data-labels for mobile view */
+.order-table td[data-label]::before {
+  content: attr(data-label);
 }
 
 .order-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
 .order-table th {
   background-color: #e7d7c9;
   color: #4b2e2e;
-  padding: 12px;
+  padding: 10px 8px;
   text-align: left;
+  font-size: 0.9rem;
 }
 
 .order-table td {
-  padding: 12px;
+  padding: 12px 8px;
   border-bottom: 1px solid #ddd;
   vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 120px;
+}
+
+/* Responsive table cells */
+@media (max-width: 768px) {
+  .order-table thead {
+    display: none;
+  }
+  
+  .btn .btn-text {
+    display: inline-block;
+  }
+  
+  .order-table, 
+  .order-table tbody, 
+  .order-table tr, 
+  .order-table td {
+    display: block;
+    width: 100%;
+  }
+  
+  .order-table tr {
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .order-table td {
+    padding: 10px 15px;
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+  
+  .order-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    padding-right: 10px;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .actions {
+    justify-content: flex-end;
+  }
+  
+  .actions a.btn {
+    min-width: 0;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
 }
 
 .actions a.btn {
   text-decoration: none;
-  padding: 6px 12px;
-  margin-right: 5px;
+  padding: 8px 12px;
   border-radius: 6px;
-  font-size: 1rem;
-  transition: 0.3s ease;
-  width: fit-content;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  flex: 1 1 auto;
+  min-width: 120px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+  }
+  
+  .actions a.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    justify-content: flex-start;
+  }
+  
+  .btn i {
+    min-width: 20px;
+    text-align: center;
+  }
 }
 
 .btn.view {
@@ -85,10 +197,13 @@
 }
 
 .badge {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 10px;
   color: white;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  text-align: center;
+  display: inline-block;
+  min-width: 60px;
 }
 
 .status-PEND {
@@ -105,4 +220,114 @@
 
 .hidden {
   display: none;
+}
+
+/* ========== MEDIA QUERIES ========== */
+
+/* Tablets (768px en adelante) */
+@media (min-width: 768px) {
+  .container {
+    padding: 20px;
+    height: 90vh;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+    text-align: left;
+  }
+  
+  .tabs {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+  
+  .tab {
+    padding: 10px 20px;
+    font-size: 1rem;
+    flex: none;
+  }
+  
+  .table-container {
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .order-table th,
+  .order-table td {
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  .actions {
+    flex-direction: row;
+    gap: 8px;
+    min-width: auto;
+  }
+  
+  .actions a.btn {
+    width: auto;
+    padding: 6px 12px;
+    margin-right: 5px;
+    font-size: 1rem;
+  }
+  
+  .badge {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    min-width: 70px;
+  }
+}
+
+/* Escritorios (1024px en adelante) */
+@media (min-width: 1024px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .table-container {
+    border-radius: 12px;
+  }
+  
+  .order-table {
+    min-width: auto;
+  }
+}
+
+/* Pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .tab {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .table-container {
+    padding: 0.5rem;
+    border-radius: 6px;
+  }
+  
+  .order-table th,
+  .order-table td {
+    padding: 8px 6px;
+    font-size: 0.8rem;
+  }
+  
+  .actions a.btn {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .badge {
+    padding: 4px 6px;
+    font-size: 0.75rem;
+    min-width: 50px;
+  }
 }

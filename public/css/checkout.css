@@ -1,0 +1,74 @@
+/* === Base Grid Layout === */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.col-1 { flex: 0 0 8%; }
+.col-2 { flex: 0 0 16%; }
+.col-3 { flex: 0 0 25%; }
+.col-4 { flex: 0 0 33%; }
+.col-12 { flex: 0 0 100%; }
+
+.right { text-align: right; }
+.center { text-align: center; }
+
+.border-b {
+  border-bottom: 1px solid #eee;
+}
+
+/* === Responsive Fix for Mobile === */
+@media (max-width: 600px) {
+  /* Make the grid stack vertically */
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* Hide header labels to reduce clutter */
+  .grid .row:first-child {
+    display: none;
+  }
+
+  /* Adjust product rows */
+  .grid .row {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Product info layout */
+  .grid .row span {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Price, quantity, subtotal grouped together */
+  .grid .row span[col-2],
+  .grid .row span[col-3],
+  .grid .row span[col-4] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Buttons smaller */
+  form button.circle {
+    padding: 0.3rem 0.5rem;
+  }
+
+  /* Total section cleaner */
+  .grid .row:last-child {
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.1rem;
+  }
+
+  /* Confirm button full width */
+  .grid form button[type="submit"] {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+}

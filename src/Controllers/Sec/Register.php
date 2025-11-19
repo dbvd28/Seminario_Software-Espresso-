@@ -46,7 +46,7 @@ class Register extends PublicController
         }
 
         $viewData = get_object_vars($this); 
-        Site::addLink("public/css/signin.css");
+        Site::addLink("public/css/signin-copy.css");
         \Views\Renderer::render("security/sigin", $viewData);
     }
 

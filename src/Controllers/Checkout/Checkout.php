@@ -6,6 +6,7 @@ use Controllers\PublicController;
 use Dao\Cart\Cart;
 use Utilities\Security;
 use Dao\Administrator\Orders;
+use Utilities\Site;
 
 class Checkout extends PublicController{
       public function run(): void
@@ -44,8 +45,8 @@ class Checkout extends PublicController{
             if ($processPayment) {
                 $PayPalOrder = new \Utilities\Paypal\PayPalOrder(
                     "test" . (time() - 10000000),
-                    "http://localhost/proyecto/Seminario_Software-Espresso-/index.php?page=Checkout-Error",
-                    "http://localhost/proyecto/Seminario_Software-Espresso-/index.php?page=Checkout-Accept"
+                    "http://localhost:8888/Seminario_Software-Espresso-/index.php?page=Checkout-Error",
+                    "http://localhost:8888/Seminario_Software-Espresso-/index.php?page=Checkout-Accept"
                 );
                 $viewData["carretilla"] = $carretilla;
                 foreach ($viewData["carretilla"] as $producto) {
@@ -91,6 +92,7 @@ class Checkout extends PublicController{
         }
         $viewData["carretilla"] = $finalCarretilla;
         $viewData["total"] = number_format($total, 2);
+        Site::addLink("public/css/checkout.css");
         \Views\Renderer::render("paypal/checkout", $viewData);
     }
 }

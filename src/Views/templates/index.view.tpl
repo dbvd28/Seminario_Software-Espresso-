@@ -1,11 +1,4 @@
 <style>
-.hero-modern {
-    height: 80vh;
-    background-size: cover;
-    background-position: center center;
-    position: relative;
-    overflow: hidden;
-}
 
 .carousel-slide {
     position: absolute;
@@ -23,47 +16,7 @@
     opacity: 1;
 }
 
-.hero-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); 
-    z-index: 2;
-}
 
-.hero-inner {
-    position: relative;
-    z-index: 3;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.hero-logo img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.hero-modern-content h1 {
-    font-size: 4em;
-    color: #ffffff;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.hero-modern-content p {
-    font-size: 1.5em;
-    color: #f0f0f0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
 .categoria-titulo {
     font-size: 2em;
     color: #333;
@@ -89,7 +42,7 @@
                 <img src="public/imgs/hero/logo.png" alt="Logo CoffeeShop">
             </div>
             <div class="hero-modern-content">
-                <h1>Disfruta del mejor café de la ciudad</h1>
+                <h1 class=titulo>Disfruta del cafe de mejor calidad</h1>
                 <p>100% seleccionado, fresco y con el aroma perfecto para cada ocasión.</p>
             </div>
         </div>
@@ -139,7 +92,7 @@
     </div>
   </div>
 
-  <div class="info-card-full reverse">
+  <div class="info-card-full">
     <div class="info-card-image">
       <img src="public/imgs/hero/concertImg.jpg" alt="Concierto en la cafetería">
     </div>

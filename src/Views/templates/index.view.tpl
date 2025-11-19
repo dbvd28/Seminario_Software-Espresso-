@@ -42,7 +42,7 @@
                 <img src="public/imgs/hero/logo.png" alt="Logo CoffeeShop">
             </div>
             <div class="hero-modern-content">
-                 <h1>Disfruta del mejor café de la ciudad</h1>
+                <h1 class=titulo>Disfruta del cafe de mejor calidad</h1>
                 <p>100% seleccionado, fresco y con el aroma perfecto para cada ocasión.</p>
             </div>
         </div>

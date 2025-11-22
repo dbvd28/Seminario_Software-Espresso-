@@ -20,4 +20,9 @@ class User extends Table {
         $sqlstr = "UPDATE usuario SET username = :username WHERE usercod = :usercod";
         return self::executeNonQuery($sqlstr, ["username" => $name,"usercod"=> $id]);
     }
+      public static function getchangedName(int $id)
+    {
+      $sqlstr = "SELECT usercod,username,useremail FROM usuario  where usercod = :usercod";
+        return self::obtenerUnRegistro($sqlstr, ["usercod"=> $id]);
+    }
 }

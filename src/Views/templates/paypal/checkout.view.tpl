@@ -20,7 +20,7 @@
       <span class="col-4">{{productName}}</span>
       <span class="col-2 right">L {{crrprc}}</span>
       <span class="col-3 center">
-        <form action="index.php?page=checkout_checkout" method="post" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        <form action="index.php?page=Checkout_Checkout" method="post" style="display: inline-flex; align-items: center; gap: 0.5rem;">
           <input type="hidden" name="productId" value="{{productId}}" />
           <button type="submit" name="removeOne" class="circle" style="background: #f44336; color: white; border: none; padding: 0.4rem 0.6rem; border-radius: 50%;">
             <i class="fa-solid fa-minus"></i>
@@ -43,7 +43,7 @@
 
     <!-- Place order -->
     <div class="row" style="padding: 1rem; display: flex; justify-content: flex-end;">
-      <form action="index.php?page=checkout_checkout" method="post" class="col-12 right" style="text-align: right;">
+      <form action="index.php?page=Checkout_Checkout" method="post" class="col-12 right" style="text-align: right;">
         <button type="submit" style="padding: 0.75rem 1.5rem; background: #2196f3; color: white; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer;">
           🧾 Confirmar Pedido
         </button>

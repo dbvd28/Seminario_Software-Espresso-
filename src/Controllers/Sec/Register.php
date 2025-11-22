@@ -30,6 +30,10 @@ class Register extends PublicController
                 $this->errorPswd = "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un caracter especial.";
                 $this->hasErrors = true;
             }
+            if(Validators::EmailExist($this->txtEmail)){
+                 $this->errorEmail = "Este correo ya esta registrado, porfavor ingrese uno diferente.";
+                $this->hasErrors = true;
+            }
 
             if (!$this->hasErrors) {
                 try {

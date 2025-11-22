@@ -21,7 +21,7 @@ class Register extends PublicController
             $this->txtEmail = $_POST["txtEmail"];
             $this->txtPswd = $_POST["txtPswd"];
 
-            
+
             if (!(Validators::IsValidEmail($this->txtEmail))) {
                 $this->errorEmail = "El correo no tiene el formato adecuado";
                 $this->hasErrors = true;
@@ -36,8 +36,8 @@ class Register extends PublicController
                     if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd)) {
                         // ENVIAR CORREO DE BIENVENIDA
                         $this->enviarCorreoBienvenida($this->txtEmail);
-                        
-                        \Utilities\Site::redirectToWithMsg("index.php?page=sec_login", "¡Usuario Registrado Satisfactoriamente! Se ha enviado un correo de bienvenida.");
+
+                        \Utilities\Site::redirectToWithMsg("index.php?page=Sec_Login", "¡Usuario Registrado Satisfactoriamente! Se ha enviado un correo de bienvenida.");
                     }
                 } catch (Exception $ex) {
                     die($ex);
@@ -45,17 +45,17 @@ class Register extends PublicController
             }
         }
 
-        $viewData = get_object_vars($this); 
+        $viewData = get_object_vars($this);
         Site::addLink("public/css/signin-copy.css");
         \Views\Renderer::render("security/sigin", $viewData);
     }
 
-    
-     //Función para enviar correo de bienvenida
-    private function enviarCorreoBienvenida($email) 
+
+    //Función para enviar correo de bienvenida
+    private function enviarCorreoBienvenida($email)
     {
         $asunto = "¡Bienvenido a Coffee Shop!";
-        
+
         $mensaje = "
         <html>
         <body>

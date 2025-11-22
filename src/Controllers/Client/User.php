@@ -9,7 +9,7 @@ use Views\Renderer;
 use Utilities\Site;
 use Utilities\Validators;
 
-const LIST_URL = "index.php?page=index";
+const LIST_URL = "index.php?page=Index";
 class User extends PrivateController
 {
     private array $viewData;
@@ -167,7 +167,7 @@ class User extends PrivateController
                         $this->viewData["nombre"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Order updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Name changed successfuly");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Order.");
                 }

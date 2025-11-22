@@ -81,7 +81,7 @@
           </ul>
         </li>
 
-        <li><a href="index.php?page=sec_logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
+        <li><a href="index.php?page=Sec_Logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Salir</a></li>
       </ul>
     </nav>
     <span>{{if ~CART_ITEMS}}<a href="index.php?page=Checkout-Checkout"><i class="fa-solid fa-cart-shopping"

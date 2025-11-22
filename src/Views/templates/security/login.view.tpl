@@ -9,7 +9,7 @@
       <div class="success-message">{{resetSuccess}}</div>
     {{endif resetSuccess}}
 
-    <form class="login-form" method="post" action="index.php?page=sec_login{{if redirto}}&redirto={{redirto}}{{endif redirto}}">
+    <form class="login-form" method="post" action="index.php?page=Sec_Login{{if redirto}}&redirto={{redirto}}{{endif redirto}}">
       <h2>Iniciar Sesión</h2>
 
       <label for="txtEmail">Correo Electrónico</label>

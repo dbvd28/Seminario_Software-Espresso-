@@ -13,8 +13,8 @@ const LIST_URL = "index.php?page=index";
 class Password extends PrivateController
 {
     private array $viewData;
-    private array $status;
 
+    private array $modes;
     public function __construct()
     {
         parent::__construct();

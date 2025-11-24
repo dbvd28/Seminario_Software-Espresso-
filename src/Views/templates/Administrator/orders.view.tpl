@@ -20,17 +20,17 @@
   <tbody id="orderTable">
     {{foreach pedidos}}
     <tr data-status="{{estado}}">
-      <td data-label="ID Pedido">{{pedidoId}}</td>
-      <td data-label="Cliente">{{username}}</td>
-      <td data-label="Fecha">{{fchpedido}}</td>
-      <td data-label="Total">{{total}}</td>
-      <td data-label="Estado"><span class="badge status-{{estado}}">{{estado}}</span></td>
-      <td class="actions" data-label="Acciones">
-        <a class="btn view" href="index.php?page=Administrator-Order&mode=DSP&id={{pedidoId}}">
+      <td>{{pedidoId}}</td>
+      <td >{{username}}</td>
+      <td >{{fchpedido}}</td>
+      <td >{{total}}</td>
+      <td ><span class="badge status-{{estado}}">{{estado}}</span></td>
+      <td class="actions" >
+        <a class="btn view" href="index.php?page=Administrator_Order&mode=DSP&id={{pedidoId}}">
           <i class="fas fa-eye"></i> <span class="btn-text">Ver detalles</span>
         </a>
         {{if ~isUpdateEnabled}}
-        <a class="btn edit" href="index.php?page=Administrator-Order&mode=UPD&id={{pedidoId}}">
+        <a class="btn edit" href="index.php?page=Administrator_Order&mode=UPD&id={{pedidoId}}">
           <i class="fas fa-edit"></i> <span class="btn-text">Cambiar estado</span>
         </a>
         {{endif ~isUpdateEnabled}}

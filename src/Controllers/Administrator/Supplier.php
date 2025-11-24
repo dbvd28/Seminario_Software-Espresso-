@@ -16,6 +16,7 @@ class Supplier extends PrivateController
     private array $viewData;
     private array $modes;
     private array $status;
+    private array $errors;
 
     public function __construct()
     {
@@ -215,7 +216,7 @@ class Supplier extends PrivateController
                 ) {
                     Site::redirectToWithMsg(LIST_URL, "Supplier created successfuly");
                 } else {
-                    $this->innerError("global", "Something wrong happend to save the new Category.");
+                    $this->innerError("global", "Something wrong happend to save the new Supplier.");
                 }
                 break;
             case "UPD":
@@ -231,7 +232,7 @@ class Supplier extends PrivateController
                 ) {
                     Site::redirectToWithMsg(LIST_URL, "Supplier updated successfuly");
                 } else {
-                    $this->innerError("global", "Something wrong happend while updating the Category.");
+                    $this->innerError("global", "Something wrong happend while updating the Supplier.");
                 }
                 break;
         }
@@ -239,7 +240,6 @@ class Supplier extends PrivateController
     private function prepareViewData()
     {
 
-        $this->viewData['selected' . $this->viewData["estado"]] = "selected";
 
         if (count($this->viewData["errors"]) > 0) {
             foreach ($this->viewData["errors"] as $scope => $errorsArray) {

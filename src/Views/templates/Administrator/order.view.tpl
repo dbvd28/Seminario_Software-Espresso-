@@ -83,7 +83,7 @@
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Precio</th>
-          <th>Total</th>
+          <th colspan="2">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -92,13 +92,13 @@
             <td>{{productName}}</td>
             <td>{{cantidad}}</td>
             <td>{{precio_unitario}}</td>
-            <td>{{subtotal}}</td>
+            <td colspan="2">{{subtotal}}</td>
          </tr>
         {{endfor productos}}
       </tbody>
       <tfoot>
   <tr>
-    <td colspan="3" style="text-align:right; font-weight:bold;">Total general:</td>
+    <td colspan="2" style="text-align:right; font-weight:bold;">Total general:</td>
     <td>{{total}}</td>
   </tr>
 </tfoot>

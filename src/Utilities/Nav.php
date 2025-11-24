@@ -16,17 +16,20 @@ class Nav
     public static function setNavContext()
     {
         $tmpNAVIGATION = Context::getContextByKey("NAVIGATION");
+        $navUserId = Context::getContextByKey("NAV_USER_ID");
         $adminItems = [];
         $userItems = [];
         $editItems = [];
         $userID = Security::getUserId();
         $navigationData = self::getNavFromJson()["private"];
         // Construir NAVIGATION si aún no existe
-        if ($tmpNAVIGATION === "") {
+      if (!is_array($tmpNAVIGATION) || count($tmpNAVIGATION) === 0 || $navUserId != $userID) {
             $tmpNAVIGATION = [];
             foreach ($navigationData as $navEntry) {
-                if ($navEntry["id"] === "Menu_User_Edit" || $navEntry["id"] === "Menu_Password_Edit" || 
-                    Security::isAuthorized($userID, $navEntry["id"], 'MNU')) {
+                if (
+                    $navEntry["id"] === "Menu_User_Edit" || $navEntry["id"] === "Menu_Password_Edit" ||
+                    Security::isAuthorized($userID, $navEntry["id"], 'MNU')
+                ) {
                     if (isset($navEntry["nav_url"])) {
                         $navEntry["nav_url"] = str_replace("{userid}", $userID, $navEntry["nav_url"]);
                     }
@@ -35,6 +38,7 @@ class Nav
             }
             $saveToSession = intval(Context::getContextByKey("DEVELOPMENT")) !== 1;
             Context::setContext("NAVIGATION", $tmpNAVIGATION, $saveToSession);
+               Context::setContext("NAV_USER_ID", $userID, $saveToSession);
         }
         // Clasificar en grupos SIEMPRE a partir de NAVIGATION actual
         $finalNav = Context::getContextByKey("NAVIGATION");
@@ -42,7 +46,9 @@ class Nav
             $finalNav = $tmpNAVIGATION;
         }
         foreach ($finalNav as $navEntry) {
-            if (!isset($navEntry["id"])) { continue; }
+            if (!isset($navEntry["id"])) {
+                continue;
+            }
             if (strpos($navEntry["id"], "Menu_Administrator_") === 0) {
                 $adminItems[] = $navEntry;
             } elseif (in_array($navEntry["id"], ["Menu_PaymentCheckout", "Menu_Client_Orders", "Menu_Client_Quejas"], true)) {
@@ -56,7 +62,7 @@ class Nav
         Context::setContext("NAV_USER", $userItems, $saveToSession);
         Context::setContext("NAV_EDIT", $editItems, $saveToSession);
         Context::setContext("IS_ADMIN_MODE", count($adminItems) > 0, $saveToSession);
-        Context::setContext("IS_USER_MODE", count($adminItems) === 0, $saveToSession);
+        Context::setContext("IS_USER_MODE", count($userItems)> 0, $saveToSession);
     }
 
     public static function invalidateNavData()

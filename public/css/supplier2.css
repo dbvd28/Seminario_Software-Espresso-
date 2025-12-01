@@ -59,6 +59,27 @@ h2 {
   color: #666;
   cursor: not-allowed;
 }
+.input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e7d7c9;
+  border-radius: 6px;
+  background-color: #f8f5f2;
+  font-size: 14px;
+  color: #333;
+}
+
+.input:read-only,
+select:disabled {
+  background-color: #e7d7c9;
+  color: #5c3d2e;
+}
+
+.row.my-2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 .back-btn {
   background-color: #a97b06;

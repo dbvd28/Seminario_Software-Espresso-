@@ -1,6 +1,6 @@
 <div class="form-container">
   <h2>Actualizar nombre de usuario</h2>
-  <form method="POST" action="index.php?page=Client-user&mode=UPD&id={{id}}">
+  <form method="POST" action="index.php?page=Client-User&mode=UPD&id={{id}}">
     <label for="username">Ingresa tu nuevo nombre de usuario</label>
     <input 
       type="text" 

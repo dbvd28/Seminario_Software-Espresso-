@@ -7,6 +7,7 @@ use Dao\Cart\Cart;
 use Utilities\Security;
 use Dao\Administrator\Orders;
 use Utilities\Site;
+use Utilities;
 
 class Checkout extends PublicController{
       public function run(): void
@@ -43,10 +44,10 @@ class Checkout extends PublicController{
             }
 
             if ($processPayment) {
-                $PayPalOrder = new \Utilities\Paypal\PayPalOrder(
+                $PayPalOrder = new \Utilities\PayPal\PayPalOrder(
                     "test" . (time() - 10000000),
-                    "http://localhost:8888/Seminario_Software-Espresso-/index.php?page=Checkout-Error",
-                    "http://localhost:8888/Seminario_Software-Espresso-/index.php?page=Checkout-Accept"
+                    "http://dvarela.alwaysdata.net/index.php?page=Checkout-Error",
+                    "http://dvarela.alwaysdata.net/index.php?page=Checkout-Accept"
                 );
                 $viewData["carretilla"] = $carretilla;
                 foreach ($viewData["carretilla"] as $producto) {

@@ -21,7 +21,7 @@
           </a>
         </div>
       </div>
-      <span class="status active">Activo</span>
+       <span class="status {{estadoClase}}">{{estadoTexto}}
     </div>
     {{endfor proveedores}}
   </div>

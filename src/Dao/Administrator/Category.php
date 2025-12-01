@@ -28,16 +28,18 @@ class Category extends Table
         );
     }
 
-    public static function update(int $id, string $nombre, string $dsc): bool
+    public static function update(int $id, string $nombre, string $dsc,string $est): bool
     {
         $sql = "UPDATE categorias SET
                 nombre = :categoryName,
                 descripcion = :categoryDescription,
-                WHERE productId = :productId";
+                estado=:estadocat
+                WHERE categoriaId = :categoriaId";
         $params = [
             "categoriaId" => $id,
-            "nombre" => $nombre,
-            "descripcion" => $dsc,
+            "categoryName" => $nombre,
+            "categoryDescription" => $dsc,
+            "estadocat"=>$est
         ];
         return self::executeNonQuery($sql, $params);
     }

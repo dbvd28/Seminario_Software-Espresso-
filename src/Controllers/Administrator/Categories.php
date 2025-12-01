@@ -15,7 +15,16 @@ class Categories extends PrivateController{
     }
     public function run():void{
     $this->viewData["categorias"]=CDAO::getAll();
-    Site::addLink("public/css/categories2.css");
+    foreach ($this->viewData["categorias"] as &$cat) {
+    if ($cat["estado"] === "ACT") {
+        $cat["estadoTexto"] = "Activo";
+        $cat["estadoClase"] = "active";
+    } else {
+        $cat["estadoTexto"] = "Inactivo";
+        $cat["estadoClase"] = "inactive";
+    }
+}
+    Site::addLink("public/css/categories3.css");
     Renderer::render("Administrator/categories",$this->viewData);
     }
 }

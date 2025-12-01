@@ -33,7 +33,7 @@ class RecoverPassword
                 $user = SecurityDao::getUsuarioByEmail($this->viewData["email"]);
                 if ($user && isset($user["useremail"]) && is_string($user["useremail"])) {
                     $token = bin2hex(random_bytes(32));
-                    $expira = date("Y-m-d H:i:s", strtotime("+1 hour"));
+                    $expira = gmdate("Y-m-d H:i:s", strtotime("+1 hour"));
                     SecurityDao::storeRecoveryToken($user["usercod"], $token, $expira);
 
                     $link = Site::getRootUrl() . "index.php?page=Client_ResetPassword&token=$token";

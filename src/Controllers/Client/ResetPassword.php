@@ -21,7 +21,6 @@ class ResetPassword
             "success" => false,
             "showForm" => true,
         ];
-
         $user = SecurityDao::getUsuarioByToken($this->viewData["token"]);
         if (!$user) {
             $this->viewData["errors"]["global"][0] = "El enlace de recuperación no es válido o ha expirado.";

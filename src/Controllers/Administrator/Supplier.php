@@ -31,6 +31,10 @@ class Supplier extends PrivateController
             "supplierPhone" => "",
             "supplierEmail" => "",
             "supplierAdd" => "",
+            "selectedACT" => "",
+            "selectedINA" => "",
+            "supplierStatus" => "",
+
             "errors" => [],
             "xsrfToken" => ""
         ];
@@ -42,6 +46,7 @@ class Supplier extends PrivateController
             "UPD" => "Editar Producto",
             "DSP" => "Detalle de Producto"
         ];
+        $this->status = ["INA", "ACT"];
     }
 
     public function run(): void
@@ -58,7 +63,7 @@ class Supplier extends PrivateController
             }
         }
         $this->prepareViewData();
-        Site::addLink("public/css/supplier.css");
+        Site::addLink("public/css/supplier2.css");
         Renderer::render("Administrator/supplier", $this->viewData);
     }
 
@@ -121,6 +126,7 @@ class Supplier extends PrivateController
             $this->viewData["supplierEmail"] = $tmpProveedor["email"];
             $this->viewData["supplierPhone"] = $tmpProveedor["telefono"];
             $this->viewData["supplierAdd"] = $tmpProveedor["direccion"];
+            $this->viewData["supplierStatus"] = $tmpProveedor["estado"];
         } else {
             $this->throwError(
                 "Something went wrong, try again.",
@@ -167,13 +173,19 @@ class Supplier extends PrivateController
                 "Trying to post without parameter ADDRESS on body"
             );
         }
+        if (!isset($_POST["estado"])) {
+            $this->throwError(
+                "Something went wrong, try again.",
+                "Trying to post without parameter STATUS on body"
+            );
+        }
         if (!isset($_POST["xsrtoken"])) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post without parameter XSRTOKEN on body"
             );
         }
-        if (intval($_POST["id"]) !== $this->viewData["categoryId"]) {
+        if (intval($_POST["id"]) !== $this->viewData["supplierId"]) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post with inconsistent parameter ID value has: " . $this->viewData["id"] . " recieved: " . $_POST["id"]
@@ -190,12 +202,13 @@ class Supplier extends PrivateController
         $this->viewData["supplierEmail"] = $_POST["correo"];
         $this->viewData["supplierPhone"] = $_POST["telefono"];
         $this->viewData["supplierAdd"] = $_POST["direccion"];
+        $this->viewData["supplierStatus"] = $_POST["estado"];
     }
 
     private function validateData(): bool
     {
-        if (Validators::IsEmpty($this->viewData["categoryName"])) {
-            $this->innerError("categoryName", "This field is required.");
+        if (Validators::IsEmpty($this->viewData["supplierName"])) {
+            $this->innerError("supplierName", "This field is required.");
         }
         return !(count($this->viewData["errors"]) > 0);
     }
@@ -223,11 +236,12 @@ class Supplier extends PrivateController
                 if (
                     SDAO::update(
                         intval($this->viewData["supplierId"]),
-                       $this->viewData["supplierName"],
+                        $this->viewData["supplierName"],
                         $this->viewData["supplierContact"],
                         $this->viewData["supplierEmail"],
                         $this->viewData["supplierPhone"],
-                        $this->viewData["supplierAdd"]
+                        $this->viewData["supplierAdd"],
+                        $this->viewData["supplierStatus"]
                     ) > 0
                 ) {
                     Site::redirectToWithMsg(LIST_URL, "Supplier updated successfuly");
@@ -239,8 +253,7 @@ class Supplier extends PrivateController
     }
     private function prepareViewData()
     {
-
-
+        $this->viewData['selected' . $this->viewData["supplierStatus"]] = "selected";
         if (count($this->viewData["errors"]) > 0) {
             foreach ($this->viewData["errors"] as $scope => $errorsArray) {
                 $this->viewData["errors_" . $scope] = $errorsArray;

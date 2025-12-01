@@ -16,7 +16,8 @@
           <a href="index.php?page=Administrator-Category&mode=UPD&id={{categoriaId}}" class="btn-edit"><i class="fa-solid fa-pen"></i>  Editar</a>
         </div>
       </div>
-      <span class="status active">Activo</span>
+      <span class="status {{estadoClase}}">{{estadoTexto}}
+      </span>
     </div>
     {{endfor categorias}}
   </div>

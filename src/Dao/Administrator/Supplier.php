@@ -31,7 +31,7 @@ class Supplier extends Table
         );
     }
 
-    public static function update(int $id,string $nombre, string $cont, string $tel, string $email, string $dir): bool
+    public static function update(int $id,string $nombre, string $cont, string $tel, string $email, string $dir,string $est): bool
     {
         $sql = "UPDATE proveedores SET
                 nombre = :provName,
@@ -39,6 +39,7 @@ class Supplier extends Table
                 telefono= :provTel,
                 email=:provEma,
                 direccion=:provDir,
+                estado=:estado
                 WHERE proveedorId = :proveedorId";
         $params = [
            "proveedorId"=>$id,
@@ -46,7 +47,8 @@ class Supplier extends Table
             "provCont"=>$cont,
             "provTel"=>$tel,
             "provEma"=>$email,
-            "provDir"=>$dir
+            "provDir"=>$dir,
+            "estado"=>$est
         ];
         return self::executeNonQuery($sql, $params);
     }

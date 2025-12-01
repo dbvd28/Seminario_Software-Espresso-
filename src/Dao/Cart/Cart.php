@@ -6,7 +6,7 @@ class Cart extends \Dao\Table
 {
     public static function getProductosDisponibles()
     {
-        $sqlAllProductosActivos = "SELECT p.*, c.nombre as categoriaNombre, c.categoriaId as categoriaId FROM productos p LEFT JOIN categorias c ON p.categoriaId = c.categoriaId WHERE p.productStock > 0 ORDER BY c.nombre, p.productName";
+        $sqlAllProductosActivos = "SELECT p.*, c.nombre as categoriaNombre, c.categoriaId as categoriaId FROM productos p LEFT JOIN categorias c ON p.categoriaId = c.categoriaId WHERE p.productStock > 0 and p.productStatus='ACT' ORDER BY c.nombre, p.productName";
         $productosDisponibles = self::obtenerRegistros($sqlAllProductosActivos, array());
 
         //Sacar el stock de productos con carretilla autorizada

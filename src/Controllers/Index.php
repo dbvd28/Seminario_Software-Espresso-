@@ -68,9 +68,8 @@ class Index extends PublicController
             $this->getCartCounter();
         }
         $this->getCartCounter();
-        
         // Obtener productos con sus categorías
-        $productos = Producto::getProductosConCategorias();
+        $productos = Cart::getProductosDisponibles();
 
         // Agrupar productos por categoría
         $productosPorCategoria = [];

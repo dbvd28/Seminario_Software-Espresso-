@@ -16,6 +16,7 @@ class Category extends PrivateController
     private array $viewData;
     private array $modes;
     private array $status;
+    private array $errors;
 
     public function __construct()
     {

@@ -63,7 +63,7 @@ class Order extends PrivateController
         if (isset($this->viewData["showShipping"]) && $this->viewData["showShipping"] === true) {
             Site::addLink("public/css/shipping.css");
         }
-        Renderer::render("Administrator/Order", $this->viewData);
+        Renderer::render("Administrator/order", $this->viewData);
     }
 
     private function throwError(string $message, string $logMessage = "")

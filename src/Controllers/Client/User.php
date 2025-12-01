@@ -9,12 +9,12 @@ use Views\Renderer;
 use Utilities\Site;
 use Utilities\Validators;
 
-const LIST_URL = "index.php?page=index";
+const LIST_URL = "index.php?page=Index";
 class User extends PrivateController
 {
     private array $viewData;
     private array $status;
-
+    private array $modes = [];
     public function __construct()
     {
         parent::__construct();
@@ -22,7 +22,7 @@ class User extends PrivateController
         $this->viewData = [
             "id" => 0,
             "nombre" => "",
-            "mode"=>"",
+            "mode" => "",
             "errors" => [],
         ];
         $this->modes = [
@@ -48,7 +48,7 @@ class User extends PrivateController
         Renderer::render("Client/username", $this->viewData);
     }
 
-  private function throwError(string $message, string $logMessage = "")
+    private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
             error_log(sprintf("%s - %s", $this->name, $logMessage));
@@ -103,7 +103,7 @@ class User extends PrivateController
         );
         if ($tmpUsuario && count($tmpUsuario) > 0) {
             $this->viewData["nombre"] = $tmpUsuario["username"];
-           
+
         } else {
             $this->throwError(
                 "Something went wrong, try again.",
@@ -120,7 +120,7 @@ class User extends PrivateController
                 "Trying to post without parameter ID on body"
             );
         }
-         if (!isset($_POST["username"])) {
+        if (!isset($_POST["username"])) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post without parameter DATE on body"
@@ -144,7 +144,7 @@ class User extends PrivateController
                 "Trying to post with inconsistent parameter XSRToken value has: " . $_SESSION[$this->name . "-xsrtoken"] . " recieved: " . $_POST["xsrtoken"]
             );
         }
-  
+
         $this->viewData["nombre"] = $_POST["username"];
     }
 
@@ -167,7 +167,13 @@ class User extends PrivateController
                         $this->viewData["nombre"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Order updated successfuly");
+                    $user = UDAO::getchangedName($this->viewData["id"]);
+                    \Utilities\Security::login(
+                        $user["usercod"],
+                        $user["username"],
+                        $user["useremail"]
+                    );
+                    Site::redirectToWithMsg(LIST_URL, "Name changed successfuly");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Order.");
                 }

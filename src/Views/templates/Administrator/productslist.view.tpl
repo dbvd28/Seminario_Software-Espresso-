@@ -1,3 +1,4 @@
+<!-- Vista: Listado de Productos (Administrador) -->
 <div class="container">
   <h1>Productos</h1>
   <a href="index.php?page=Administrator-Products&mode=INS" class="btn new">Nuevo Producto</a>

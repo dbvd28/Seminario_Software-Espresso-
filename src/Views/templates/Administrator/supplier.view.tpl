@@ -1,10 +1,13 @@
+<!-- Vista: Detalle/Edición de Proveedor (Administrador) -->
 <div class="container">
   <button class="back-btn" id="back_btn">Atras</button>
     <h1>Proveedor {{supplierName}}</h1>
 
+    <!-- Formulario de detalles del proveedor -->
     <form action="index.php?page=Administrator-Supplier&mode={{mode}}&id={{supplierId}}" method="post" enctype="multipart/form-data" class="details">
         
     <h2>Detalles del proveedor</h2>
+    <!-- Campos principales del proveedor -->
     <div class="details-grid">
       <div>
         <label for="idsup" class="label">ID proveedor: </label>
@@ -32,6 +35,7 @@
         <input type="text" class="input" id="dirsup" name="direccion" value="{{supplierAdd}}" {{if readonly}} readonly disabled {{endif readonly}}>
       </div>
     </div>
+    <!-- Acciones del formulario -->
     <div class="actions">
       <button type="submit" class="btn_submit" name="btnEnviar"{{if readonly}} hidden {{endif readonly}}>Guardar cambios</button>
     </div>

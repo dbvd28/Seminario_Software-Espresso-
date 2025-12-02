@@ -1,7 +1,9 @@
+<!-- Vista: Detalle/Edición de Categoría (Administrador) -->
 <div class="container">
   <button class="back-btn" id="back_btn">Atras</button>
     <h1>Categoria #{{categoryName}}</h1>
 
+    <!-- Formulario de detalles de categoría -->
     <form action="index.php?page=Administrator-Categories&mode={{mode}}&id={{categoryId}}" method="post" enctype="multipart/form-data" class="details">
         
     <h2>Detalles de la categoria</h2>

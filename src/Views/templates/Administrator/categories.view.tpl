@@ -1,9 +1,11 @@
+<!-- Vista: Listado de Categorías (Administrador) -->
 <div class="container">
   <div class="header">
     <h2>☕Categorias</h2>
     <a href="index.php?page=Administrator-Category&mode=INS" class="btn-new"><i class="fa-solid fa-plus"></i> Nueva Categoria</a>
   </div>
 
+  <!-- Tarjetas de categorías -->
   <div class="grid">
     {{foreach categorias}}
     <div class="card">
@@ -20,4 +22,5 @@
     </div>
     {{endfor categorias}}
   </div>
+</div>
 

@@ -1,0 +1,15 @@
+INSERT INTO `funciones_roles` (`rolescod`, `fncod`, `fnrolest`, `fnexp`) VALUES
+('Admin', 'Controllers\\Administrator\\Order', 'ACT', '2026-08-09 00:00:00'),
+('Admin', 'Controllers\\Administrator\\Orders', 'ACT', '2026-08-09 00:00:00'),
+('Admin', 'Controllers\\Administrator\\Orders\\update', 'ACT', '2026-08-09 00:00:00'),
+('Admin', 'Controllers\\Administrator\\Products', 'ACT', '2026-07-10 00:00:00'),
+('Admin', 'Controllers\\Administrator\\ProductsList', 'ACT', '2026-07-10 00:00:00'),
+('Admin', 'Menu_Administrator_Orders', 'ACT', '2026-08-09 00:00:00'),
+('Admin', 'Menu_Administrator_Products', 'ACT', '2026-07-10 00:00:00'),
+('Client', 'Controllers\\Checkout\\Accept', 'ACT', '2025-08-01 01:12:01'),
+('Client', 'Controllers\\Client\\Order', 'ACT', '2025-07-31 00:27:01'),
+('Client', 'Controllers\\Client\\Orders', 'ACT', '2027-07-22 00:00:00'),
+('Client', 'Controllers\\Client\\User', 'ACT', '2027-07-22 00:00:00'),
+('Client', 'Menu_Client_Orders', 'ACT', '2026-07-31 00:14:22'),
+('Client', 'Menu_Username', 'ACT', '2026-07-31 00:14:22'),
+('Client', 'Menu_PaymentCheckout', 'ACT', '2026-07-10 00:00:00');

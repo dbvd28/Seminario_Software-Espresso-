@@ -1,0 +1,67 @@
+{
+  "public": [
+    {
+      "id": "Menu_SignIn",
+      "nav_url": "index.php?page=Sec_Login",
+      "nav_label":"<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Iniciar Sesión"
+    },
+    {
+      "id": "Menu_SignUp",
+      "nav_url": "index.php?page=Sec_Register",
+      "nav_label":"<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Crear Cuenta"
+    }
+  ],
+  "private": [
+    {
+      "id": "Menu_PaymentCheckout",
+      "nav_url": "index.php?page=Checkout_Checkout",
+      "nav_label": "<i class=\"fa-solid fa-cart-shopping\"></i>&nbspCarretilla de Compra"
+    },
+    {
+      "id": "Menu_Administrator_Orders",
+      "nav_url": "index.php?page=Administrator-Orders",
+      "nav_label": "<i class=\"fas fa-desktop\"></i>&nbsp;Administrador de Pedidos"
+    },
+    {
+      "id": "Menu_Administrator_Products",
+      "nav_url": "index.php?page=Administrator-Productslist",
+      "nav_label": "<i class=\"fas fa-desktop\"></i>&nbsp;Administrador de Productos"
+    },
+        {
+      "id": "Menu_Administrator_Categories",
+      "nav_url": "index.php?page=Administrator-Categories",
+      "nav_label": "<i class=\"fas fa-desktop\"></i>&nbsp;Administrador de Categorias"
+    },
+     {
+      "id": "Menu_Administrator_Suppliers",
+      "nav_url": "index.php?page=Administrator-Suppliers",
+      "nav_label": "<i class=\"fas fa-desktop\"></i>&nbsp;Administrador de Proveedores"
+    }
+    ,
+    {
+      "id":"Menu_Client_Orders",
+      "nav_url": "index.php?page=Client_Orders",
+      "nav_label": "<i class=\"fas fa-clipboard-list\"></i>&nbsp;Pedidos"
+    },
+    {
+      "id":"Menu_Client_Quejas",
+      "nav_url": "index.php?page=Client_Quejas",
+      "nav_label": "<i class=\"fas fa-comment-alt\"></i>&nbsp;Quejas y Sugerencias"
+    },
+    {
+      "id":"Menu_Administrator_Quejas",
+      "nav_url": "index.php?page=Administrator_Quejas",
+      "nav_label": "<i class=\"fas fa-comments\"></i>&nbsp;Administrar Quejas"
+    },
+    {
+      "id":"Menu_User_Edit",
+      "nav_url": "index.php?page=Client_User&mode=UPD&id={userid}",
+      "nav_label": "<i class=\"fas fa-user-edit\"></i>&nbsp;Editar Nombre de Usuario"
+    },
+    {
+      "id":"Menu_Password_Edit",
+      "nav_url": "index.php?page=Client_Password",
+      "nav_label": "<i class=\"fas fa-key\"></i>&nbsp;Cambiar Contraseña"
+    }
+  ]
+}

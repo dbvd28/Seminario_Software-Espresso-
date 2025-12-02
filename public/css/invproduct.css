@@ -1,0 +1,149 @@
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.back-btn {
+  background-color: #a47148;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #8d5c36;
+}
+
+.container h1 {
+  margin-bottom: 30px;
+  font-size: 26px;
+  color: #4b2e2e;
+}
+
+.details h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #5c3d2e;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.imagen_producto {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.imagen_producto img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e7d7c9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.edit-image-btn {
+  background-color: #4b2e2e;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  display: inline-block;
+}
+
+.edit-image-btn:hover {
+  background-color: #37211f;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #4b2e2e;
+}
+
+.input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e7d7c9;
+  border-radius: 6px;
+  background-color: #f8f5f2;
+  font-size: 14px;
+  color: #333;
+}
+
+.input:read-only,
+select:disabled {
+  background-color: #e7d7c9;
+  color: #5c3d2e;
+}
+
+.row.my-2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: #8d5c36;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.actions {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn_submit {
+  background-color: #a47148;
+  color: white;
+  padding: 10px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn_submit:hover {
+  background-color: #8d5c36;
+}
+
+@media (max-width: 600px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  .actions {
+    text-align: center;
+  }
+  .back-btn {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .btn_submit {
+    width: 100%;
+  }
+  .row.my-2 {
+    display: block;
+  }
+}

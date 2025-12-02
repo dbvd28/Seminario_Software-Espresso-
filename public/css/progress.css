@@ -1,0 +1,12 @@
+.order-progress{display:flex;align-items:center;gap:10px;margin:10px 0 16px}
+.progress-step{display:flex;flex-direction:column;align-items:center}
+.progress-step .dot{width:28px;height:28px;border-radius:50%;background:#dcdcdc;color:#777;display:flex;align-items:center;justify-content:center;font-weight:700}
+.progress-step .label{margin-top:6px;font-size:.9rem;color:#666}
+.progress-line{flex:1;height:4px;border-radius:2px;background:#e6e6e6}
+.progress-step.active .dot{background:#4f46e5;color:#fff;box-shadow:0 0 0 4px rgba(79,70,229,.15)}
+.progress-line.active{background:linear-gradient(90deg,#4f46e5,#60a5fa)}
+
+@media (max-width:768px){
+  .progress-step .label{font-size:.8rem}
+  .progress-step .dot{width:24px;height:24px}
+}

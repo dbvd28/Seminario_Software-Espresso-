@@ -16,7 +16,6 @@
     opacity: 1;
 }
 
-
 .categoria-titulo {
     font-size: 2em;
     color: #333;

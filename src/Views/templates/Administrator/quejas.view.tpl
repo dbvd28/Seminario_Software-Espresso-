@@ -1,4 +1,5 @@
 
+<!-- Vista: Gestión de Quejas y Sugerencias (Administrador) -->
 <div class="quejas-container">
   <div class="quejas-header">
     <h2>Gestión de Quejas y Sugerencias</h2>

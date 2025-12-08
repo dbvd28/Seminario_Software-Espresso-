@@ -1,3 +1,4 @@
+<!-- Vista: Listado de Proveedores (Administrador) -->
 <div class="container">
   <div class="header">
     <h2>☕ Proveedores</h2>
@@ -6,6 +7,7 @@
     </a>
   </div>
 
+  <!-- Tarjetas de proveedores -->
   <div class="grid">
     {{foreach proveedores}}
     <div class="card">
@@ -21,7 +23,7 @@
           </a>
         </div>
       </div>
-      <span class="status active">Activo</span>
+       <span class="status {{estadoClase}}">{{estadoTexto}}
     </div>
     {{endfor proveedores}}
   </div>

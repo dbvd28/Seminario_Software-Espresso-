@@ -1,0 +1,81 @@
+/* ===== Móviles (pantallas pequeñas) ===== */
+@media (max-width: 600px) {
+    .grid {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: none;
+        background: #fff;
+        padding: 1rem;
+    }
+
+    .row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        background-color: #fafafa;
+    }
+
+    /* Cada celda se comporta como un bloque */
+    .row > .col-1,
+    .row > .col-2,
+    .row > .col-3,
+    .row > .col-4 {
+        flex: 1 1 100%;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* Título del encabezado (Checkout) centrado y con mejor escala */
+    .grid h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Botones (+ y -) centrados horizontalmente */
+    .row form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    /* Alinear los precios y subtotal de forma clara */
+    .right,
+    .center {
+        text-align: center;
+    }
+
+    /* Sección del total y botón final */
+    .grid .row:last-child {
+        flex-direction: column;
+        text-align: center;
+        border: none;
+        background: none;
+    }
+
+    .grid .row:last-child form {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .grid .row:last-child button {
+        width: 90%;
+        max-width: 300px;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    /* Ajuste general para evitar que se vea tan "aplastado" */
+    .col-1, .col-2, .col-3, .col-4 {
+        min-width: auto;
+    }
+}

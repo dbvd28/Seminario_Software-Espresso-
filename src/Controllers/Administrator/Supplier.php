@@ -11,11 +11,17 @@ use Utilities\Validators;
 
 const LIST_URL = "index.php?page=Administrator-Suppliers";
 
+/**
+ * Controlador de proveedor (detalle/edición/creación)
+ *
+ * Maneja el CRUD de proveedores con validaciones y renderizado.
+ */
 class Supplier extends PrivateController
 {
     private array $viewData;
     private array $modes;
     private array $status;
+    private array $errors;
 
     public function __construct()
     {
@@ -30,6 +36,10 @@ class Supplier extends PrivateController
             "supplierPhone" => "",
             "supplierEmail" => "",
             "supplierAdd" => "",
+            "selectedACT" => "",
+            "selectedINA" => "",
+            "supplierStatus" => "",
+
             "errors" => [],
             "xsrfToken" => ""
         ];
@@ -41,8 +51,12 @@ class Supplier extends PrivateController
             "UPD" => "Editar Producto",
             "DSP" => "Detalle de Producto"
         ];
+        $this->status = ["INA", "ACT"];
     }
 
+    /**
+     * Orquesta el flujo de detalle/edición/creación de proveedor
+     */
     public function run(): void
     {
 
@@ -57,10 +71,13 @@ class Supplier extends PrivateController
             }
         }
         $this->prepareViewData();
-        Site::addLink("public/css/supplier.css");
+        Site::addLink("public/css/supplier2.css");
         Renderer::render("Administrator/supplier", $this->viewData);
     }
 
+    /**
+     * Redirige con mensaje y registra en log opcionalmente
+     */
     private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
@@ -68,6 +85,9 @@ class Supplier extends PrivateController
         }
         Site::redirectToWithMsg(LIST_URL, $message);
     }
+    /**
+     * Registra errores por ámbito/campo para la vista
+     */
     private function innerError(string $scope, string $message)
     {
         if (!isset($this->viewData["errors"][$scope])) {
@@ -77,6 +97,9 @@ class Supplier extends PrivateController
         }
     }
 
+    /**
+     * Valida y asigna parámetros de consulta (mode, id)
+     */
     private function getQueryParamsData()
     {
         if (!isset($_GET["mode"])) {
@@ -109,6 +132,9 @@ class Supplier extends PrivateController
         }
     }
 
+    /**
+     * Obtiene datos del proveedor desde la BD
+     */
     private function getDataFromDB()
     {
         $tmpProveedor = SDAO::getById(
@@ -120,6 +146,7 @@ class Supplier extends PrivateController
             $this->viewData["supplierEmail"] = $tmpProveedor["email"];
             $this->viewData["supplierPhone"] = $tmpProveedor["telefono"];
             $this->viewData["supplierAdd"] = $tmpProveedor["direccion"];
+            $this->viewData["supplierStatus"] = $tmpProveedor["estado"];
         } else {
             $this->throwError(
                 "Something went wrong, try again.",
@@ -128,6 +155,9 @@ class Supplier extends PrivateController
         }
     }
 
+    /**
+     * Extrae y valida datos del formulario (POST), incluyendo XSRF
+     */
     private function getBodyData()
     {
         if (!isset($_POST["id"])) {
@@ -166,13 +196,19 @@ class Supplier extends PrivateController
                 "Trying to post without parameter ADDRESS on body"
             );
         }
+        if (!isset($_POST["estado"])) {
+            $this->throwError(
+                "Something went wrong, try again.",
+                "Trying to post without parameter STATUS on body"
+            );
+        }
         if (!isset($_POST["xsrtoken"])) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post without parameter XSRTOKEN on body"
             );
         }
-        if (intval($_POST["id"]) !== $this->viewData["categoryId"]) {
+        if (intval($_POST["id"]) !== $this->viewData["supplierId"]) {
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post with inconsistent parameter ID value has: " . $this->viewData["id"] . " recieved: " . $_POST["id"]
@@ -189,16 +225,23 @@ class Supplier extends PrivateController
         $this->viewData["supplierEmail"] = $_POST["correo"];
         $this->viewData["supplierPhone"] = $_POST["telefono"];
         $this->viewData["supplierAdd"] = $_POST["direccion"];
+        $this->viewData["supplierStatus"] = $_POST["estado"];
     }
 
+    /**
+     * Valida datos requeridos del proveedor
+     */
     private function validateData(): bool
     {
-        if (Validators::IsEmpty($this->viewData["categoryName"])) {
-            $this->innerError("categoryName", "This field is required.");
+        if (Validators::IsEmpty($this->viewData["supplierName"])) {
+            $this->innerError("supplierName", "This field is required.");
         }
         return !(count($this->viewData["errors"]) > 0);
     }
 
+    /**
+     * Inserta o actualiza proveedor según `mode`
+     */
     private function processData()
     {
         $mode = $this->viewData["mode"];
@@ -215,32 +258,34 @@ class Supplier extends PrivateController
                 ) {
                     Site::redirectToWithMsg(LIST_URL, "Supplier created successfuly");
                 } else {
-                    $this->innerError("global", "Something wrong happend to save the new Category.");
+                    $this->innerError("global", "Something wrong happend to save the new Supplier.");
                 }
                 break;
             case "UPD":
                 if (
                     SDAO::update(
                         intval($this->viewData["supplierId"]),
-                       $this->viewData["supplierName"],
+                        $this->viewData["supplierName"],
                         $this->viewData["supplierContact"],
                         $this->viewData["supplierEmail"],
                         $this->viewData["supplierPhone"],
-                        $this->viewData["supplierAdd"]
+                        $this->viewData["supplierAdd"],
+                        $this->viewData["supplierStatus"]
                     ) > 0
                 ) {
                     Site::redirectToWithMsg(LIST_URL, "Supplier updated successfuly");
                 } else {
-                    $this->innerError("global", "Something wrong happend while updating the Category.");
+                    $this->innerError("global", "Something wrong happend while updating the Supplier.");
                 }
                 break;
         }
     }
+    /**
+     * Prepara tokens, flags, errores y modo lectura
+     */
     private function prepareViewData()
     {
-
-        $this->viewData['selected' . $this->viewData["estado"]] = "selected";
-
+        $this->viewData['selected' . $this->viewData["supplierStatus"]] = "selected";
         if (count($this->viewData["errors"]) > 0) {
             foreach ($this->viewData["errors"] as $scope => $errorsArray) {
                 $this->viewData["errors_" . $scope] = $errorsArray;

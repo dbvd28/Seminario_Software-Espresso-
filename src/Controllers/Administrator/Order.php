@@ -11,6 +11,12 @@ use Utilities\Validators;
 
 const LIST_URL = "index.php?page=Administrator-Orders";
 
+/**
+ * Controlador de Administración de Pedidos
+ *
+ * Gestiona la visualización y actualización del estado de pedidos,
+ * así como el cálculo de subtotales y el renderizado de la vista.
+ */
 class Order extends PrivateController
 {
     private array $viewData;
@@ -44,6 +50,13 @@ class Order extends PrivateController
 
         $this->status = ["ENV", "PAG", "PEND"];
     }
+    /**
+     * Flujo principal del controlador de pedidos
+     * - Valida parámetros de consulta
+     * - Carga datos del pedido y sus productos
+     * - Procesa POST cuando aplica
+     * - Prepara datos y renderiza la vista
+     */
     public function run(): void
     {
         $this->getQueryParamsData();
@@ -63,9 +76,12 @@ class Order extends PrivateController
         if (isset($this->viewData["showShipping"]) && $this->viewData["showShipping"] === true) {
             Site::addLink("public/css/shipping.css");
         }
-        Renderer::render("Administrator/Order", $this->viewData);
+        Renderer::render("Administrator/order", $this->viewData);
     }
 
+    /**
+     * Redirige con mensaje de error y registra en log opcionalmente
+     */
     private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
@@ -73,6 +89,9 @@ class Order extends PrivateController
         }
         Site::redirectToWithMsg(LIST_URL, $message);
     }
+    /**
+     * Acumula errores por ámbito/campo para mostrarlos en la vista
+     */
     private function innerError(string $scope, string $message)
     {
         if (!isset($this->viewData["errors"][$scope])) {
@@ -82,6 +101,9 @@ class Order extends PrivateController
         }
     }
 
+    /**
+     * Valida y asigna `mode` e `id` desde la URL
+     */
     private function getQueryParamsData()
     {
         if (!isset($_GET["mode"])) {
@@ -114,6 +136,9 @@ class Order extends PrivateController
         }
     }
 
+    /**
+     * Carga datos del pedido y sus productos; calcula subtotales
+     */
     private function getDataFromDB()
     {
         $tmpPedido = ODAO::getOrdersById(
@@ -150,6 +175,9 @@ class Order extends PrivateController
 
     }
 
+    /**
+     * Extrae y valida datos del formulario (POST), incluyendo XSRF
+     */
     private function getBodyData()
     {
         if (!isset($_POST["id"])) {
@@ -208,6 +236,9 @@ class Order extends PrivateController
 
     }
 
+    /**
+     * Valida el estado seleccionado contra el catálogo permitido
+     */
     private function validateData(): bool
     {
         if (Validators::IsEmpty($this->viewData["estado"])) {
@@ -220,6 +251,9 @@ class Order extends PrivateController
         return !(count($this->viewData["errors"]) > 0);
     }
 
+    /**
+     * Actualiza el estado del pedido cuando `mode` es UPD
+     */
     private function processData()
     {
         $mode = $this->viewData["mode"];
@@ -238,6 +272,10 @@ class Order extends PrivateController
                 break;
         }
     }
+    /**
+     * Prepara banderas de progreso y visibilidad de envío,
+     * tokens, errores y estados seleccionados para la vista
+     */
     private function prepareViewData()
     {
 

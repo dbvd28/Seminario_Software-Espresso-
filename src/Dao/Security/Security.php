@@ -92,7 +92,7 @@ class Security extends \Dao\Table
 
         return self::obtenerUnRegistro($sqlstr, $params);
     }
-    
+
     static public function getUserById($id)
     {
         $sqlstr = "SELECT * from `usuario` where `usercod` = :usercod ;";
@@ -100,16 +100,16 @@ class Security extends \Dao\Table
 
         return self::obtenerUnRegistro($sqlstr, $params);
     }
-    
+
     static public function updateUserPassword($userId, $newPassword)
     {
         if (!\Utilities\Validators::IsValidPassword($newPassword)) {
             return false;
         }
-        
+
         $hashedPassword = self::_hashPassword($newPassword);
         $sqlstr = "UPDATE usuario SET userpswd = :userpswd, userpswdchg = now() WHERE usercod = :usercod";
-        
+
         return self::executeNonQuery($sqlstr, [
             "userpswd" => $hashedPassword,
             "usercod" => $userId
@@ -292,7 +292,7 @@ class Security extends \Dao\Table
             return false;
         }
     }
-    
+
     static public function storeRecoveryToken($userId, $token, $expira)
     {
         $sql = "UPDATE usuario 
@@ -310,13 +310,14 @@ class Security extends \Dao\Table
     {
         $sql = "SELECT * FROM usuario 
                 WHERE userrecoverytoken = :token 
-                AND userrecoveryexpira > NOW()";
-        return self::obtenerUnRegistro($sql, ["token" => $token]);
+                AND userrecoveryexpira > :nouw";
+        return self::obtenerUnRegistro($sql, ["token" => $token, "nouw" => date("Y-m-d H:i:s")]);
     }
 
     static public function updatePasswordByToken($token, $newPassword)
     {
-        if (!\Utilities\Validators::IsValidPassword($newPassword)) return false;
+        if (!\Utilities\Validators::IsValidPassword($newPassword))
+            return false;
 
         $hashedPassword = self::_hashPassword($newPassword);
         $sql = "UPDATE usuario 

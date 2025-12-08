@@ -16,7 +16,6 @@
     opacity: 1;
 }
 
-
 .categoria-titulo {
     font-size: 2em;
     color: #333;
@@ -68,7 +67,7 @@
                         <h2>{{productName}}</h2>
                         <p>{{productDescription}}</p>
                         <!-- Eliminé la línea de {{categoriaId}} ya que ahora se muestra en el título de la categoría -->
-                        <form action="index.php?page=index" method="post">
+                        <form action="index.php?page=Index" method="post">
                             <input type="hidden" name="productId" value="{{productId}}">
                             <button type="submit" name="addToCart" class="add-to-cart">
                                 <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito

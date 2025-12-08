@@ -3,7 +3,7 @@
     <div class="register-image">
       <img src="public/imgs/hero/register.jpg" alt="Coffee Art" />
     </div>
-    <form class="register-form" method="post" action="index.php?page=sec_register">
+    <form class="register-form" method="post" action="index.php?page=Sec_Register">
       <h2>Crear tu cuenta</h2>
 
       <label for="txtEmail">Correo Electrónico</label>

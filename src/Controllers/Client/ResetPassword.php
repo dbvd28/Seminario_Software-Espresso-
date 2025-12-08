@@ -49,7 +49,7 @@ class ResetPassword
                 if ($actualizado) {
                     $this->viewData["success"] = true;
                     $this->viewData["showForm"] = false;
-                    exit;
+                    Site::redirectToWithMsg("index.php","Su contraseña se ha cambiado exitosamente!");
                 } else {
                     $this->viewData["errors"]["global"][0] = "No se pudo actualizar la contraseña. Intenta más tarde.";
                 }

@@ -1,3 +1,4 @@
+<!-- Vista: Detalle/Edición de Categoría (Administrador) -->
 <div class="container">
   <button class="back-btn" id="back_btn">Atras</button>
     <h1>Categoria #{{categoryName}}</h1>

@@ -11,6 +11,11 @@ use Utilities\Validators;
 
 const LIST_URL = "index.php?page=Administrator-Categories";
 
+/**
+ * Controlador de categoría (detalle/edición/creación)
+ *
+ * Maneja el CRUD de categorías con validaciones y renderizado de vista.
+ */
 class Category extends PrivateController
 {
     private array $viewData;
@@ -45,6 +50,9 @@ class Category extends PrivateController
         $this->status = ["INA", "ACT"];
     }
 
+    /**
+     * Orquesta el flujo de detalle/edición/creación de categoría
+     */
     public function run(): void
     {
 
@@ -63,6 +71,9 @@ class Category extends PrivateController
         Renderer::render("Administrator/category", $this->viewData);
     }
 
+    /**
+     * Redirige con mensaje y registra error en log opcionalmente
+     */
     private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
@@ -70,6 +81,9 @@ class Category extends PrivateController
         }
         Site::redirectToWithMsg(LIST_URL, $message);
     }
+    /**
+     * Agrega errores por ámbito/campo para la vista
+     */
     private function innerError(string $scope, string $message)
     {
         if (!isset($this->viewData["errors"][$scope])) {
@@ -79,6 +93,9 @@ class Category extends PrivateController
         }
     }
 
+    /**
+     * Valida y asigna parámetros de consulta (mode, id)
+     */
     private function getQueryParamsData()
     {
         if (!isset($_GET["mode"])) {
@@ -111,6 +128,9 @@ class Category extends PrivateController
         }
     }
 
+    /**
+     * Obtiene datos de la categoría desde la BD
+     */
     private function getDataFromDB()
     {
         $tmpCategoria = CDAO::getById(
@@ -128,6 +148,9 @@ class Category extends PrivateController
         }
     }
 
+    /**
+     * Extrae y valida datos del formulario (POST), incluyendo XSRF
+     */
     private function getBodyData()
     {
         if (!isset($_POST["id"])) {
@@ -178,6 +201,9 @@ class Category extends PrivateController
         $this->viewData["estado"]=$_POST["estado"];
     }
 
+    /**
+     * Valida datos requeridos de la categoría
+     */
     private function validateData(): bool
     {
         if (Validators::IsEmpty($this->viewData["estado"])) {
@@ -194,6 +220,9 @@ class Category extends PrivateController
         return !(count($this->viewData["errors"]) > 0);
     }
 
+    /**
+     * Ejecuta inserción o actualización según `mode`
+     */
     private function processData()
     {
         $mode = $this->viewData["mode"];
@@ -226,6 +255,9 @@ class Category extends PrivateController
                 break;
         }
     }
+    /**
+     * Prepara errores, flags, tokens y marca lectura cuando aplica
+     */
     private function prepareViewData()
     {
         $this->viewData['selected' . $this->viewData["estado"]] = "selected";

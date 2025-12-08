@@ -26,7 +26,16 @@ class Suppliers extends PrivateController{
      */
     public function run():void{
     $this->viewData["proveedores"]=SDAO::getAll();
-    Site::addLink("public/css/suppliers.css");
+     foreach ($this->viewData["proveedores"] as &$prov) {
+    if ($prov["estado"] === "ACT") {
+        $prov["estadoTexto"] = "Activo";
+        $prov["estadoClase"] = "active";
+    } else {
+        $prov["estadoTexto"] = "Inactivo";
+        $prov["estadoClase"] = "inactive";
+    }
+}
+    Site::addLink("public/css/suppliers2.css");
     Renderer::render("Administrator/suppliers",$this->viewData);
     }
 }

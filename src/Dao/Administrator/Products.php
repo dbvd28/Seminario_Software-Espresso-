@@ -120,13 +120,13 @@ class Products extends Table
      */
     public static function getAllProv(): array
     {
-        return self::obtenerRegistros("SELECT * FROM proveedores", []);
+        return self::obtenerRegistros("SELECT * FROM proveedores where estado='ACT'", []);
     }
     /**
      * Obtiene todas las categorías (auxiliar para el formulario)
      */
     public static function getAllCat(): array
     {
-        return self::obtenerRegistros("SELECT * FROM categorias", []);
+        return self::obtenerRegistros("SELECT * FROM categorias where estado='ACT'", []);
     }
 }

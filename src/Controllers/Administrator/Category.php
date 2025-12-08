@@ -33,6 +33,9 @@ class Category extends PrivateController
             "categoryId" => 0,
             "categoryName" => "",
             "categoryDescription" => "",
+            "estado"=>"",
+            "selectedACT" => "",
+            "selectedINA" => "",
             "errors" => [],
             "xsrfToken" => ""
         ];
@@ -44,6 +47,7 @@ class Category extends PrivateController
             "UPD" => "Editar Producto",
             "DSP" => "Detalle de Producto"
         ];
+        $this->status = ["INA", "ACT"];
     }
 
     /**
@@ -135,6 +139,7 @@ class Category extends PrivateController
         if ($tmpCategoria && count($tmpCategoria) > 0) {
             $this->viewData["categoryName"] = $tmpCategoria["nombre"];
             $this->viewData["categoryDescription"] = $tmpCategoria["descripcion"];
+            $this->viewData["estado"]=$tmpCategoria["estado"];
         } else {
             $this->throwError(
                 "Something went wrong, try again.",
@@ -152,6 +157,12 @@ class Category extends PrivateController
             $this->throwError(
                 "Something went wrong, try again.",
                 "Trying to post without parameter ID on body"
+            );
+        }
+         if (!isset($_POST["estado"])) {
+            $this->throwError(
+                "Something went wrong, try again.",
+                "Trying to post without parameter Estado on body"
             );
         }
         if (!isset($_POST["nombre"])) {
@@ -187,6 +198,7 @@ class Category extends PrivateController
         }
         $this->viewData["categoryName"] = $_POST["nombre"];
         $this->viewData["categoryDescription"] = $_POST["descripcion"];
+        $this->viewData["estado"]=$_POST["estado"];
     }
 
     /**
@@ -194,6 +206,14 @@ class Category extends PrivateController
      */
     private function validateData(): bool
     {
+        if (Validators::IsEmpty($this->viewData["estado"])) {
+            $this->innerError("estado", "This field is required.");
+        }
+        if (!in_array($this->viewData["estado"], $this->status)) {
+            $this->innerError("estado", "This field is required.");
+        }
+
+        return !(count($this->viewData["errors"]) > 0);
         if (Validators::IsEmpty($this->viewData["categoryName"])) {
             $this->innerError("categoryName", "This field is required.");
         }
@@ -214,7 +234,7 @@ class Category extends PrivateController
                         $this->viewData["categoryDescription"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Categorycreated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Category created successfuly");
                 } else {
                     $this->innerError("global", "Something wrong happend to save the new Category.");
                 }
@@ -225,6 +245,7 @@ class Category extends PrivateController
                         intval($this->viewData["categoryId"]),
                         $this->viewData["categoryName"],
                         $this->viewData["categoryDescription"],
+                        $this->viewData["estado"]
                     ) > 0
                 ) {
                     Site::redirectToWithMsg(LIST_URL, "Category updated successfuly");
@@ -239,6 +260,8 @@ class Category extends PrivateController
      */
     private function prepareViewData()
     {
+        $this->viewData['selected' . $this->viewData["estado"]] = "selected";
+
         if (count($this->viewData["errors"]) > 0) {
             foreach ($this->viewData["errors"] as $scope => $errorsArray) {
                 $this->viewData["errors_" . $scope] = $errorsArray;

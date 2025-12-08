@@ -67,11 +67,7 @@ class RecoverPassword
                 if ($user && isset($user["useremail"]) && is_string($user["useremail"])) {
                     // Genera un token aleatorio seguro para la recuperación (32 bytes en hexadecimal)
                     $token = bin2hex(random_bytes(32));
-                    
-                    // Establece la fecha de expiración del token (1 hora desde ahora)
-                    $expira = date("Y-m-d H:i:s", strtotime("+1 hour"));
-                    
-                    // Almacena el token y su fecha de expiración en la base de datos
+                    $expira = gmdate("Y-m-d H:i:s", strtotime("+1 hour"));
                     SecurityDao::storeRecoveryToken($user["usercod"], $token, $expira);
 
                     // Construye el enlace de restablecimiento de contraseña

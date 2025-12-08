@@ -92,6 +92,7 @@ class ResetPassword
                     $this->viewData["success"] = true;
                     // Oculta el formulario después de la actualización exitosa
                     $this->viewData["showForm"] = false;
+                    Site::redirectToWithMsg("index.php","Su contraseña se ha cambiado exitosamente!");
                 } else {
                     // Agrega error genérico si falla la actualización
                     $this->viewData["errors"]["global"][0] = "No se pudo actualizar la contraseña. Intenta más tarde.";

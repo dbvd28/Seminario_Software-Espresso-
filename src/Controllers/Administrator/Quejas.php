@@ -7,10 +7,18 @@ use Dao\Administrator\Quejas as QuejasDao;
 use Utilities\Site;
 use Views\Renderer;
 
+/**
+ * Controlador de gestión de Quejas y Sugerencias
+ *
+ * Lista quejas, permite responder y cambiar estado mediante acciones POST.
+ */
 class Quejas extends PrivateController
 {
     private $viewData = [];
 
+    /**
+     * Flujo principal: inicializa, maneja POST, obtiene quejas y renderiza vista
+     */
     public function run(): void
     {
         $this->init();
@@ -31,6 +39,9 @@ class Quejas extends PrivateController
         Renderer::render("Administrator/quejas", $this->viewData);
     }
 
+    /**
+     * Inicializa el arreglo de datos para la vista y banderas de estado
+     */
     private function init()
     {
         $this->viewData = [
@@ -44,6 +55,11 @@ class Quejas extends PrivateController
         ];
     }
 
+    /**
+     * Procesa acciones enviadas por POST:
+     * - Responder queja (guardar respuesta y marcar estado)
+     * - Cambiar estado de una queja
+     */
     private function handlePostAction()
     {
         // Acción: Responder queja

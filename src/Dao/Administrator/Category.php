@@ -55,7 +55,7 @@ class Category extends Table
      * @param string $dsc
      * @return bool éxito
      */
-    public static function update(int $id, string $nombre, string $dsc): bool
+    public static function update(int $id, string $nombre, string $dsc,string $est): bool
     {
         $sql = "UPDATE categorias SET
                 nombre = :categoryName,

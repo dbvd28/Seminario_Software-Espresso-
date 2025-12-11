@@ -51,7 +51,7 @@ class Supplier extends Table
     /**
      * Actualiza un proveedor
      */
-    public static function update(int $id,string $nombre, string $cont, string $tel, string $email, string $dir): bool
+    public static function update(int $id,string $nombre, string $cont, string $tel, string $email, string $dir,string $est): bool
     {
         $sql = "UPDATE proveedores SET
                 nombre = :provName,

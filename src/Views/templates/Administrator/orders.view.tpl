@@ -44,7 +44,7 @@
 </div>
 </div>
 <script>
-  // Filtra filas según la pestaña/estado seleccionado
+  /*Filtra filas según la pestaña/estado seleccionado*/
   const tabs = document.querySelectorAll('.tab'); const rows =
   document.querySelectorAll('#orderTable tr'); tabs.forEach(tab => {
   tab.addEventListener('click', () => { tabs.forEach(t =>

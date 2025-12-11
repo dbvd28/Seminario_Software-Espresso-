@@ -13,6 +13,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 >>>>>>> 4b948e4e086e285ce434b30daa28f700dffb1d71
 class Register extends PublicController
 {
+    private $txtName = "";
     private $txtEmail = "";
     private $txtPswd = "";
     private $errorEmail = "";
@@ -22,6 +23,7 @@ class Register extends PublicController
     public function run(): void
     {
         if ($this->isPostBack()) {
+            $this->txtName = $_POST["username"];
             $this->txtEmail = $_POST["txtEmail"];
             $this->txtPswd = $_POST["txtPswd"];
 
@@ -48,7 +50,7 @@ class Register extends PublicController
 
             if (!$this->hasErrors) {
                 try {
-                    if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd)) {
+                    if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd, $this->txtName)) {
                         // ENVIAR CORREO DE BIENVENIDA
                         $this->enviarCorreoBienvenida($this->txtEmail);
 <<<<<<< HEAD

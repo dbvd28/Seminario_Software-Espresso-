@@ -9,7 +9,7 @@ use Views\Renderer;
 use Utilities\Site;
 use Utilities\Validators;
 
-const LIST_URL = "index.php?page=Administrator-ProductsList";
+const LIST_URL = "index.php?page=Administrator-Productslist";
 
 /**
  * Controlador de Administración de Productos

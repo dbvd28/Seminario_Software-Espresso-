@@ -291,7 +291,7 @@ class Products extends PrivateController
                                 $targetPath
                             ) > 0
                         ) {
-                            Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                            Site::redirectToWithMsg(LIST_URL, "Producto creado exitósamente");
                         } else {
                             $this->innerError("global", "Something wrong happend to save the new Product.");
                         }
@@ -310,7 +310,7 @@ class Products extends PrivateController
                                     $targetPath
                                 ) > 0
                             ) {
-                                Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                                Site::redirectToWithMsg(LIST_URL, "Producto creado exitósamente");
                             } else {
                                 $this->innerError("global", "Something wrong happend to save the new Product.");
                             }
@@ -332,7 +332,7 @@ class Products extends PrivateController
                             " "
                         ) > 0
                     ) {
-                        Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                        Site::redirectToWithMsg(LIST_URL, "Producto creado exitósamente");
                     } else {
                         $this->innerError("global", "Something wrong happend to save the new Product.");
                     }
@@ -378,7 +378,7 @@ class Products extends PrivateController
                             }
                         }
                     }
-                    Site::redirectToWithMsg(LIST_URL, "Product updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Producto actualizado exitósamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Product.");
                 }

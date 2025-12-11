@@ -256,7 +256,7 @@ class Supplier extends PrivateController
                         $this->viewData["supplierAdd"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Supplier created successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "proveedor creado exitósamente");
                 } else {
                     $this->innerError("global", "Something wrong happend to save the new Supplier.");
                 }
@@ -273,7 +273,7 @@ class Supplier extends PrivateController
                         $this->viewData["supplierStatus"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Supplier updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "proveedor actualizado exitosamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Supplier.");
                 }

@@ -265,7 +265,7 @@ class Order extends PrivateController
                         $this->viewData["estado"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Order updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Orden actualizada exitósamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Order.");
                 }

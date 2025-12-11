@@ -1,5 +1,12 @@
 <style>
 
+.hero-modern {
+    position: relative;
+    width: 100%;
+    height: 55vh;
+    overflow: hidden;
+}
+
 .carousel-slide {
     position: absolute;
     top: 0;
@@ -16,16 +23,251 @@
     opacity: 1;
 }
 
+.hero-gradient {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero-inner {
+    width: 100%;
+    padding: 20px;
+}
+
+.hero-logo img {
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+}
+
+.hero-modern-content {
+    text-align: center;
+    color: #fff;
+}
+
+.hero-modern-content h1 {
+    font-size: 1.4em;
+    margin-bottom: 8px;
+}
+
+.hero-modern-content p {
+    font-size: .9em;
+}
+
+
 .categoria-titulo {
-    font-size: 2em;
+    font-size: 1.5em;
     color: #333;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
     text-align: center;
     border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
 }
 
+
+/* PRODUCTOS */
+.product-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 15px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}
+
+.product-image {
+    position: relative;
+}
+
+.product-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.price-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: .8em;
+}
+
+.stock-tag {
+    position: absolute;
+    right: 10px;
+    background: #0009;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: .8em;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-info h2 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.product-info p {
+    font-size: .9em;
+    margin-bottom: 12px;
+    color: #555;
+}
+
+/* Botón */
+.add-to-cart {
+    width: 100%;
+    padding: 10px;
+    background: #5A3E1B;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: .9em;
+    cursor: pointer;
+}
+
+.add-to-cart i {
+    margin-right: 6px;
+}
+
+.add-to-cart:hover {
+    background: #462f15;
+}
+
+
+.info-panel-full {
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card-full {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.info-card-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.info-card-content {
+    padding: 15px;
+}
+
+.info-card-content h2 {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+}
+
+.info-card-content p {
+    font-size: .9em;
+}
+
+
+/* TESTIMONIOS */
+.testimonios {
+    padding: 30px 15px;
+    text-align: center;
+}
+
+.testimonial-title {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+.testimonial-carousel {
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial {
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+
+.testimonial.active {
+    opacity: 1;
+}
+
+.testimonial p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.testimonial span {
+    font-size: .9em;
+    color: #666;
+}
+
+
+@media (min-width: 768px) {
+
+    .hero-modern {
+        height: 75vh;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .info-card-full {
+        display: flex;
+        height: 200px;
+    }
+
+    .info-card-image img {
+        height: 100%;
+        width: 40%;
+    }
+
+    .info-card-content {
+        width: 60%;
+        padding: 20px;
+    }
+
+    .product-image img {
+        height: 230px;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .product-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-modern-content h1 {
+        font-size: 2em;
+    }
+}
 </style>
 
 <section class="hero-modern" id="hero-carousel">

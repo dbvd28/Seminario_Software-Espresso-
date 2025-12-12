@@ -34,7 +34,7 @@ class Index extends PublicController
     private array $viewData;
     public function run(): void
     {
-        Site::addLink("public/css/product6.css");
+        Site::addLink("public/css/product7.css");
 
         if ($this->isPostBack()) {
             if (Security::isLogged()) {

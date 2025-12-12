@@ -39,8 +39,6 @@ class Accept extends PrivateController
             $result = $PayPalRestApi->captureOrder($session_token);
             $archivo = json_encode($result);
             $dataview["orderjson"] = json_encode($result, JSON_PRETTY_PRINT);
-            ml . getPedidoDetailsFromDB();
-
             $resultArray = json_decode(json_encode($result), true);
             $amount = $resultArray["purchase_units"][0]["payments"]["captures"][0]["amount"]["value"];
             $orderId = Orders::addOrder(Security::getUserId(), floatval($amount), $archivo);

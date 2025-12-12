@@ -39,4 +39,32 @@ class Mailer
             return false;
         }
     }
+      public static function sendHtmlEmail(string $toEmail, string $subject, string $htmlBody, string $fromName = 'COFFEESHOP'): bool
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            // Reutiliza la configuración SMTP de getenv()
+            $mail->isSMTP();
+            $mail->Host = getenv("SMTP_HOST");
+            $mail->SMTPAuth = true;
+            $mail->Username = getenv("SMTP_USER");
+            $mail->Password = getenv("SMTP_SECRET");
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = getenv("SMTP_PORT");
+
+            $mail->setFrom('no-reply@coffeeshop.com', $fromName);
+            $mail->addAddress($toEmail);
+
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = $htmlBody;
+            
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            error_log("Mailer error al enviar recibo: " . $e->getMessage());
+            return false;
+        }
+    }
 }

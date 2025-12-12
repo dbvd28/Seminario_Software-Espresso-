@@ -267,8 +267,8 @@ class Supplier extends PrivateController
                         intval($this->viewData["supplierId"]),
                         $this->viewData["supplierName"],
                         $this->viewData["supplierContact"],
-                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierPhone"],
+                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierAdd"],
                         $this->viewData["supplierStatus"]
                     ) > 0

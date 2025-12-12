@@ -41,8 +41,9 @@
 
 .stock-tag {
     position: absolute;
+    top:10px;
     right: 10px;
-    background: #0009;
+    background-color: rgba(15, 13, 13, 0.6);
     color: white;
     padding: 5px 10px;
     border-radius: 6px;

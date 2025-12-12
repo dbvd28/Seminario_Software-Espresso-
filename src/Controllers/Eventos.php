@@ -19,7 +19,7 @@ use \Views\Renderer;
  *
  * @category Public
  * @package  Controllers
- * @author   Gemini AI
+ * @author  Jhonathan
  * @license  MIT http://
  * @link     http://
  */

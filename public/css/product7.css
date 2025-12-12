@@ -366,6 +366,15 @@
   .product-card {
     width: 80%;
   }
+  .info-card-full {
+    flex-direction: column;
+    width: 90vw;
+    height: fit-content;
+  }
+  .info-card-image,
+  .info-card-content {
+    width: 100%;
+  }
 }
 /* Phones */
 @media (max-width: 320px) {

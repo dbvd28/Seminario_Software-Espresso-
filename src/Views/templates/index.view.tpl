@@ -1,5 +1,6 @@
 <style>
 
+
 .carousel-slide {
     position: absolute;
     top: 0;
@@ -17,15 +18,38 @@
 }
 
 
+
 .categoria-titulo {
-    font-size: 2em;
+    font-size: 1.5em;
     color: #333;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
     text-align: center;
     border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
 }
+.price-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: .8em;
+}
+
+.stock-tag {
+    position: absolute;
+    right: 10px;
+    background: #0009;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: .8em;
+}
+
+
 
 </style>
 

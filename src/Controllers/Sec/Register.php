@@ -9,6 +9,7 @@ use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 class Register extends PublicController
 {
+    private $txtName = "";
     private $txtEmail = "";
     private $txtPswd = "";
     private $errorEmail = "";
@@ -18,9 +19,9 @@ class Register extends PublicController
     public function run(): void
     {
         if ($this->isPostBack()) {
+            $this->txtName = $_POST["username"];
             $this->txtEmail = $_POST["txtEmail"];
             $this->txtPswd = $_POST["txtPswd"];
-
 
             if (!(Validators::IsValidEmail($this->txtEmail))) {
                 $this->errorEmail = "El correo no tiene el formato adecuado";
@@ -37,7 +38,7 @@ class Register extends PublicController
 
             if (!$this->hasErrors) {
                 try {
-                    if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd)) {
+                    if (\Dao\Security\Security::newUsuario($this->txtEmail, $this->txtPswd, $this->txtName)) {
                         // ENVIAR CORREO DE BIENVENIDA
                         $this->enviarCorreoBienvenida($this->txtEmail);
 

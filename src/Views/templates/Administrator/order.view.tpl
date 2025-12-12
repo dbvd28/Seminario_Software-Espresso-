@@ -1,6 +1,8 @@
+<!-- Vista: Detalle/Actualización de Pedido (Administrador) -->
 <div class="container">
     <button class="back-btn" id="back_btn">Atras</button>
     <h1>Pedido #{{id}}</h1>
+  <!-- Indicador de progreso según estado -->
   <div class="order-progress">
     <div class="progress-step {{if step1}}active{{endif step1}}">
       <div class="dot">1</div>
@@ -17,6 +19,7 @@
       <div class="label">Enviado</div>
     </div>
   </div>
+  <!-- Animación mostrada cuando el estado es ENV (Enviado) -->
   {{if showShipping}}
   <div class="shipping-anim">
     <div class="shipping-anim__sky">
@@ -35,6 +38,7 @@
   </div>
   {{endif showShipping}}
 
+    <!-- Formulario de detalles y cambio de estado -->
     <form action="index.php?page=Administrator-Order&mode={{mode}}&id={{id}}" method="post" class="details">
         
     <h2>Detalles del pedido</h2>

@@ -1,3 +1,4 @@
+<!-- Vista: Detalle/Edición de Producto (Administrador) -->
 <div class="container">
   <button class="back-btn" id="back_btn">Atras</button>
     <h1>Producto #{{productId}}</h1>
@@ -5,6 +6,7 @@
     <form action="index.php?page=Administrator-Products&mode={{mode}}&id={{productId}}" method="post" enctype="multipart/form-data" class="details">
         
     <h2>Detalles del producto</h2>
+        <!-- Sección de imagen del producto con botón de edición -->
         <div class="imagen_producto">
   <img id="product-image" src="{{productImgUrl}}" alt="{{productName}}">
   
@@ -79,6 +81,7 @@
   </form>
 </div>
    <script>
+  // Previsualiza la imagen seleccionada antes de subirla
   function previewImage(event) {
     const image = document.getElementById('product-image');
     const file = event.target.files[0];

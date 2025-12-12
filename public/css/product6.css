@@ -67,6 +67,7 @@
   align-items: center;
   gap: 3rem;
   flex-wrap: wrap;
+  background-color: #171717,transparent;
 }
 
 .hero-logo img {
@@ -151,27 +152,26 @@
   z-index: 1;
 }
 
-.price-tag,
-.stock-tag {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  font-size: 1rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 0.5rem;
-  z-index: 2;
-}
-
 .price-tag {
-  top: 1rem;
-  left: 1rem;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: .8em;
 }
 
 .stock-tag {
-  top: 1rem;
-  right: 1rem;
+    position: absolute;
+    right: 10px;
+    background: #0009;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: .8em;
 }
-
 .product-info {
   padding: 2rem;
   flex-grow: 1;
@@ -346,7 +346,7 @@
     height: 75vh;
   }
 
-  .hero-modern-content h1 {
+  .hero-modern-content .titulo{
     font-size: 2.4rem;
   }
 
@@ -359,11 +359,18 @@
     text-align: center;
   }
 }
-
+@media (max-width: 426px) {
+.product-list {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+  .product-card {
+    width: 80%;
+  }
+}
 /* Phones */
 @media (max-width: 320px) {
   .hero-modern {
-    width: 90vw;
+    width: 95vw;
     height: 75vh;
     background-size: cover;
     background-position: center;
@@ -375,7 +382,7 @@
     padding: 1.2rem;
   }
 
-  .hero-modern-content h1 {
+  .hero-modern-content .titulo {
     font-size: 1.8rem;
     color: #ffffff;
     margin-bottom: 10px;

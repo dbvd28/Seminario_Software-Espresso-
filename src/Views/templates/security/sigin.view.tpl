@@ -6,6 +6,9 @@
     <form class="register-form" method="post" action="index.php?page=Sec_Register">
       <h2>Crear tu cuenta</h2>
 
+      <label for="txtName">Nombre de usuario</label>
+      <input type="text" id="txtName" name="username" value="{{txtName}}" placeholder="Nombre de usuario" />
+
       <label for="txtEmail">Correo Electrónico</label>
       <input type="email" id="txtEmail" name="txtEmail" value="{{txtEmail}}" placeholder="tucorreo@ejemplo.com" />
       {{if errorEmail}}

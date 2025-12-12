@@ -11,6 +11,12 @@ use Utilities\Validators;
 
 const LIST_URL = "index.php?page=Administrator-Productslist";
 
+/**
+ * Controlador de Administración de Productos
+ *
+ * Gestiona creación, edición y visualización de productos.
+ * Carga datos, valida entradas, procesa acciones y renderiza vistas.
+ */
 class Products extends PrivateController
 {
     private array $viewData;
@@ -53,6 +59,13 @@ class Products extends PrivateController
         $this->status = ["INA", "ACT"];
     }
 
+    /**
+     * Orquesta el flujo principal del módulo de productos
+     * - Lee parámetros de consulta
+     * - Carga datos de BD
+     * - Procesa POST (validación y persistencia)
+     * - Prepara y renderiza la vista
+     */
     public function run(): void
     {
 
@@ -75,6 +88,9 @@ class Products extends PrivateController
         Renderer::render("Administrator/product", $this->viewData);
     }
 
+    /**
+     * Redirige con mensaje y registra en log opcionalmente
+     */
     private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
@@ -82,6 +98,9 @@ class Products extends PrivateController
         }
         Site::redirectToWithMsg(LIST_URL, $message);
     }
+    /**
+     * Agrega un error asociado a un ámbito/campo para la vista
+     */
     private function innerError(string $scope, string $message)
     {
         if (!isset($this->viewData["errors"][$scope])) {
@@ -91,6 +110,9 @@ class Products extends PrivateController
         }
     }
 
+    /**
+     * Valida y asigna parámetros de la URL (mode, id)
+     */
     private function getQueryParamsData()
     {
         if (!isset($_GET["mode"])) {
@@ -123,6 +145,9 @@ class Products extends PrivateController
         }
     }
 
+    /**
+     * Obtiene el producto y listas auxiliares (proveedores/categorías)
+     */
     private function getDataFromDB()
     {
         $tmpProducto = ProductDAO::getById(
@@ -155,6 +180,9 @@ class Products extends PrivateController
         }
     }
 
+    /**
+     * Extrae y valida datos del formulario (POST), incluyendo XSRF
+     */
     private function getBodyData()
     {
         if (!isset($_POST["id"])) {
@@ -222,6 +250,9 @@ class Products extends PrivateController
 
     }
 
+    /**
+     * Valida datos de `viewData` antes de persistir
+     */
     private function validateData(): bool
     {
         if (Validators::IsEmpty($this->viewData["estado"])) {
@@ -234,6 +265,9 @@ class Products extends PrivateController
         return !(count($this->viewData["errors"]) > 0);
     }
 
+    /**
+     * Ejecuta la acción según el modo (INS/UPD), manejando imagen
+     */
     private function processData()
     {
         $mode = $this->viewData["mode"];
@@ -257,7 +291,7 @@ class Products extends PrivateController
                                 $targetPath
                             ) > 0
                         ) {
-                            Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                            Site::redirectToWithMsg(LIST_URL, "Producto creado exitósamente");
                         } else {
                             $this->innerError("global", "Something wrong happend to save the new Product.");
                         }
@@ -276,7 +310,7 @@ class Products extends PrivateController
                                     $targetPath
                                 ) > 0
                             ) {
-                                Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                                Site::redirectToWithMsg(LIST_URL, "Producto creado exitósamente");
                             } else {
                                 $this->innerError("global", "Something wrong happend to save the new Product.");
                             }
@@ -298,7 +332,7 @@ class Products extends PrivateController
                             " "
                         ) > 0
                     ) {
-                        Site::redirectToWithMsg(LIST_URL, "Product created successfuly");
+                        Site::redirectToWithMsg(LIST_URL, "Producto creado exitósamente");
                     } else {
                         $this->innerError("global", "Something wrong happend to save the new Product.");
                     }
@@ -344,13 +378,16 @@ class Products extends PrivateController
                             }
                         }
                     }
-                    Site::redirectToWithMsg(LIST_URL, "Product updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Producto actualizado exitósamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Product.");
                 }
                 break;
         }
     }
+    /**
+     * Prepara banderas, errores, tokens y valores seleccionados para la vista
+     */
     private function prepareViewData()
     {
 

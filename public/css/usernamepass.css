@@ -39,6 +39,20 @@
   outline: none;
   border-color: #a47148;
 }
+.form-container input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d8c3a5;
+  background-color: #fffdf7;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.form-container input[type="password"]:focus {
+  outline: none;
+  border-color: #a47148;
+}
 
 /* Button */
 .form-container button[type="submit"] {

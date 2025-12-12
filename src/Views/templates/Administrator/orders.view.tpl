@@ -1,5 +1,7 @@
+<!-- Vista: Listado de Pedidos (Administrador) -->
 <div class="container">
 <h1 class="title">Pedidos</h1>
+<!-- Filtros por estado -->
 <div class="tabs">
   <span class="tab active" data-status="PEND">Pendiente</span>
   <span class="tab" data-status="PAG">Aceptado</span>
@@ -42,6 +44,7 @@
 </div>
 </div>
 <script>
+  /*Filtra filas según la pestaña/estado seleccionado*/
   const tabs = document.querySelectorAll('.tab'); const rows =
   document.querySelectorAll('#orderTable tr'); tabs.forEach(tab => {
   tab.addEventListener('click', () => { tabs.forEach(t =>

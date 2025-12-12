@@ -4,6 +4,11 @@ namespace Dao\Administrator;
 
 use Dao\Table;
 
+/**
+ * DAO de Quejas (Administrador)
+ *
+ * Consultas y actualizaciones sobre la tabla `quejas`.
+ */
 class Quejas extends Table
 {
     /**

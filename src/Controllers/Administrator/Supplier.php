@@ -11,6 +11,11 @@ use Utilities\Validators;
 
 const LIST_URL = "index.php?page=Administrator-Suppliers";
 
+/**
+ * Controlador de proveedor (detalle/edición/creación)
+ *
+ * Maneja el CRUD de proveedores con validaciones y renderizado.
+ */
 class Supplier extends PrivateController
 {
     private array $viewData;
@@ -49,6 +54,9 @@ class Supplier extends PrivateController
         $this->status = ["INA", "ACT"];
     }
 
+    /**
+     * Orquesta el flujo de detalle/edición/creación de proveedor
+     */
     public function run(): void
     {
 
@@ -67,6 +75,9 @@ class Supplier extends PrivateController
         Renderer::render("Administrator/supplier", $this->viewData);
     }
 
+    /**
+     * Redirige con mensaje y registra en log opcionalmente
+     */
     private function throwError(string $message, string $logMessage = "")
     {
         if (!empty($logMessage)) {
@@ -74,6 +85,9 @@ class Supplier extends PrivateController
         }
         Site::redirectToWithMsg(LIST_URL, $message);
     }
+    /**
+     * Registra errores por ámbito/campo para la vista
+     */
     private function innerError(string $scope, string $message)
     {
         if (!isset($this->viewData["errors"][$scope])) {
@@ -83,6 +97,9 @@ class Supplier extends PrivateController
         }
     }
 
+    /**
+     * Valida y asigna parámetros de consulta (mode, id)
+     */
     private function getQueryParamsData()
     {
         if (!isset($_GET["mode"])) {
@@ -115,6 +132,9 @@ class Supplier extends PrivateController
         }
     }
 
+    /**
+     * Obtiene datos del proveedor desde la BD
+     */
     private function getDataFromDB()
     {
         $tmpProveedor = SDAO::getById(
@@ -123,8 +143,8 @@ class Supplier extends PrivateController
         if ($tmpProveedor && count($tmpProveedor) > 0) {
             $this->viewData["supplierName"] = $tmpProveedor["nombre"];
             $this->viewData["supplierContact"] = $tmpProveedor["contacto"];
-            $this->viewData["supplierEmail"] = $tmpProveedor["email"];
             $this->viewData["supplierPhone"] = $tmpProveedor["telefono"];
+            $this->viewData["supplierEmail"] = $tmpProveedor["email"];
             $this->viewData["supplierAdd"] = $tmpProveedor["direccion"];
             $this->viewData["supplierStatus"] = $tmpProveedor["estado"];
         } else {
@@ -135,6 +155,9 @@ class Supplier extends PrivateController
         }
     }
 
+    /**
+     * Extrae y valida datos del formulario (POST), incluyendo XSRF
+     */
     private function getBodyData()
     {
         if (!isset($_POST["id"])) {
@@ -205,6 +228,9 @@ class Supplier extends PrivateController
         $this->viewData["supplierStatus"] = $_POST["estado"];
     }
 
+    /**
+     * Valida datos requeridos del proveedor
+     */
     private function validateData(): bool
     {
         if (Validators::IsEmpty($this->viewData["supplierName"])) {
@@ -213,6 +239,9 @@ class Supplier extends PrivateController
         return !(count($this->viewData["errors"]) > 0);
     }
 
+    /**
+     * Inserta o actualiza proveedor según `mode`
+     */
     private function processData()
     {
         $mode = $this->viewData["mode"];
@@ -222,12 +251,12 @@ class Supplier extends PrivateController
                     SDAO::insert(
                         $this->viewData["supplierName"],
                         $this->viewData["supplierContact"],
-                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierPhone"],
+                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierAdd"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Supplier created successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Proveedor creado exitósamente");
                 } else {
                     $this->innerError("global", "Something wrong happend to save the new Supplier.");
                 }
@@ -238,19 +267,22 @@ class Supplier extends PrivateController
                         intval($this->viewData["supplierId"]),
                         $this->viewData["supplierName"],
                         $this->viewData["supplierContact"],
-                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierPhone"],
+                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierAdd"],
                         $this->viewData["supplierStatus"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Supplier updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Proveedor actualizado exitosamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Supplier.");
                 }
                 break;
         }
     }
+    /**
+     * Prepara tokens, flags, errores y modo lectura
+     */
     private function prepareViewData()
     {
         $this->viewData['selected' . $this->viewData["supplierStatus"]] = "selected";

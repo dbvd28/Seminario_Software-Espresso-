@@ -91,7 +91,7 @@ class Accept extends PrivateController
             $this->viewData["productos"] = $tmpProductos;
             $datosPedido["productos"]=$tmpProductos;
             $datosPedido["pedidoId"]=$tmpPedido['pedidoId'];
-            $datosPedido["total"]=0;
+            $datosPedido["total"]=$tmpPedido['total'];
             $cuerpoHTML = $this->renderReciboHtml($datosPedido);
             Mailer::sendHtmlEmail(
                 $tmpPedido['useremail'],

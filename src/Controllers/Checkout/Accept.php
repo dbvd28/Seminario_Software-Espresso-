@@ -89,7 +89,10 @@ class Accept extends PrivateController
                 $producto["subtotal"] = number_format($cantidad * $precio, 2, '.', '');
             }
             $this->viewData["productos"] = $tmpProductos;
-            $cuerpoHTML = $this->renderReciboHtml($tmpProductos);
+            $datosPedido["productos"]=$tmpProductos;
+            $datosPedido["pedidoId"]=$tmpPedido['pedidoId'];
+            $datosPedido["total"]=0;
+            $cuerpoHTML = $this->renderReciboHtml($datosPedido);
             Mailer::sendHtmlEmail(
                 $tmpPedido['useremail'],
                 '✅ ¡Tu Recibo de COFFEESHOP! Pedido #' . $tmpPedido['pedidoId'],
@@ -113,7 +116,7 @@ class Accept extends PrivateController
 {
     $productosHtml = "";
 
-    foreach ($datosPedido['productos'] as $producto) {
+    foreach ($datosPedido["productos"] as $producto) {
         $productosHtml .= "<tr>
             <td>" . htmlspecialchars($producto['productName']) . "</td>
             <td style='text-align:center;'>" . htmlspecialchars($producto['cantidad']) . "</td>

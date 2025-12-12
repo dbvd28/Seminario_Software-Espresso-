@@ -110,23 +110,63 @@ class Accept extends PrivateController
         Site::redirectToWithMsg(LIST_URL, $message);
     }
     function renderReciboHtml(array $datosPedido): string
-    {
+{
+    $productosHtml = "";
 
-        $template = file_get_contents('../templates/paypal/recibo_confirmacion.view.tpl');
-
-
-        $template = str_replace('{{pedidoId}}', htmlspecialchars($datosPedido['pedidoId']), $template);
-
-        $productosHtml = '';
-        foreach ($datosPedido['productos'] as $producto) {
-            $productosHtml .= '<tr>';
-            $productosHtml .= '<td>' . htmlspecialchars($producto['productName']) . '</td>';
-            $productosHtml .= '<td>' . htmlspecialchars($producto['cantidad']) . '</td>';
-            $productosHtml .= '<td>$' . number_format($producto['precio_unitario'], 2) . '</td>';
-            $productosHtml .= '<td>$' . number_format($producto['subtotal'], 2) . '</td>';
-            $productosHtml .= '</tr>';
-        }
-
-        return str_replace('{{productos_table_rows}}', $productosHtml, $template);
+    foreach ($datosPedido['productos'] as $producto) {
+        $productosHtml .= "<tr>
+            <td>" . htmlspecialchars($producto['productName']) . "</td>
+            <td style='text-align:center;'>" . htmlspecialchars($producto['cantidad']) . "</td>
+            <td style='text-align:right;'>L " . number_format($producto['precio_unitario'], 2) . "</td>
+            <td style='text-align:right;'>L " . number_format($producto['subtotal'], 2) . "</td>
+        </tr>";
     }
+
+    // TOTAL DEL PEDIDO
+    $total = number_format($datosPedido['total'], 2);
+
+    // ID DEL PEDIDO
+    $pedidoId = $datosPedido['pedidoId'];
+
+    // FECHA
+    $fecha = date("d/m/Y h:i A");
+
+    // HTML COMPLETO
+    $html = "
+    <div style='font-family: Arial; max-width: 600px; margin: auto; padding: 20px; background: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'>
+
+        <h2 style='text-align: center; color: #8B4513;'>☕ COFFEESHOP</h2>
+        <h3 style='text-align: center;'>Recibo de Compra</h3>
+
+        <p><strong>Pedido #:</strong> {$pedidoId}</p>
+        <p><strong>Fecha:</strong> {$fecha}</p>
+
+        <hr>
+
+        <table width='100%' cellspacing='0' cellpadding='8' style='border-collapse: collapse;'>
+            <thead>
+                <tr style='background: #f2f2f2; text-align: left;'>
+                    <th>Producto</th>
+                    <th>Cant</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {$productosHtml}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h3 style='text-align: right;'>Total: L {$total}</h3>
+
+        <p style='text-align: center; margin-top: 20px; color: #555;'>
+            ¡Gracias por tu compra!  
+        </p>
+
+    </div>";
+
+    return $html;
+}
 }

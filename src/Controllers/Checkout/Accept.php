@@ -8,6 +8,7 @@ use Dao\Administrator\Orders;
 use Utilities\Security;
 use Utilities\Site;
 use Dao\Administrator\Orders as ODAO;
+Use Utilities\Mailer;
 const LIST_URL = "index.php?page=Checkout-Checkout";
 class Accept extends PrivateController
 {
@@ -38,20 +39,22 @@ class Accept extends PrivateController
             $result = $PayPalRestApi->captureOrder($session_token);
             $archivo = json_encode($result);
             $dataview["orderjson"] = json_encode($result, JSON_PRETTY_PRINT);
+            ml . getPedidoDetailsFromDB();
+
             $resultArray = json_decode(json_encode($result), true);
             $amount = $resultArray["purchase_units"][0]["payments"]["captures"][0]["amount"]["value"];
             $orderId = Orders::addOrder(Security::getUserId(), floatval($amount), $archivo);
             try {
 
                 if (Orders::transferTempCartToOrder(Security::getUserId(), $orderId)) {
-       
+
                     $this->viewData["pedidoId"] = $orderId;
                     $this->getDataFromDB();
                 } else {
-                       $this->throwError(  "Su producto no esta disponible por los momentos","The product is not available.");
+                    $this->throwError("Su producto no esta disponible por los momentos", "The product is not available.");
                 }
             } catch (\Exception $e) {
-                $this->throwError(  "Something went wrong, try again.","The product is not available.".$e->getMessage());
+                $this->throwError("Something went wrong, try again.", "The product is not available." . $e->getMessage());
             }
 
         } else {
@@ -88,6 +91,12 @@ class Accept extends PrivateController
                 $producto["subtotal"] = number_format($cantidad * $precio, 2, '.', '');
             }
             $this->viewData["productos"] = $tmpProductos;
+            $cuerpoHTML = $this->renderReciboHtml($tmpProductos);
+            Mailer::sendHtmlEmail(
+                $tmpPedido['useremail'],
+                '✅ ¡Tu Recibo de COFFEESHOP! Pedido #' . $tmpPedido['pedidoId'],
+                $cuerpoHTML
+            );
         } else {
             $this->throwError(
                 "Something went wrong, try again.",
@@ -101,5 +110,25 @@ class Accept extends PrivateController
             error_log(sprintf("%s - %s", $this->name, $logMessage));
         }
         Site::redirectToWithMsg(LIST_URL, $message);
+    }
+    function renderReciboHtml(array $datosPedido): string
+    {
+
+        $template = file_get_contents('../templates/paypal/recibo_confirmacion.view.tpl');
+
+
+        $template = str_replace('{{pedidoId}}', htmlspecialchars($datosPedido['pedidoId']), $template);
+
+        $productosHtml = '';
+        foreach ($datosPedido['productos'] as $producto) {
+            $productosHtml .= '<tr>';
+            $productosHtml .= '<td>' . htmlspecialchars($producto['productName']) . '</td>';
+            $productosHtml .= '<td>' . htmlspecialchars($producto['cantidad']) . '</td>';
+            $productosHtml .= '<td>$' . number_format($producto['precio_unitario'], 2) . '</td>';
+            $productosHtml .= '<td>$' . number_format($producto['subtotal'], 2) . '</td>';
+            $productosHtml .= '</tr>';
+        }
+
+        return str_replace('{{productos_table_rows}}', $productosHtml, $template);
     }
 }

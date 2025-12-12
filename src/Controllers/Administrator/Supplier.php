@@ -143,8 +143,8 @@ class Supplier extends PrivateController
         if ($tmpProveedor && count($tmpProveedor) > 0) {
             $this->viewData["supplierName"] = $tmpProveedor["nombre"];
             $this->viewData["supplierContact"] = $tmpProveedor["contacto"];
-            $this->viewData["supplierEmail"] = $tmpProveedor["email"];
             $this->viewData["supplierPhone"] = $tmpProveedor["telefono"];
+            $this->viewData["supplierEmail"] = $tmpProveedor["email"];
             $this->viewData["supplierAdd"] = $tmpProveedor["direccion"];
             $this->viewData["supplierStatus"] = $tmpProveedor["estado"];
         } else {
@@ -251,12 +251,12 @@ class Supplier extends PrivateController
                     SDAO::insert(
                         $this->viewData["supplierName"],
                         $this->viewData["supplierContact"],
-                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierPhone"],
+                        $this->viewData["supplierEmail"],
                         $this->viewData["supplierAdd"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Supplier created successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Proveedor creado exitósamente");
                 } else {
                     $this->innerError("global", "Something wrong happend to save the new Supplier.");
                 }
@@ -273,7 +273,7 @@ class Supplier extends PrivateController
                         $this->viewData["supplierStatus"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Supplier updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Proveedor actualizado exitosamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Supplier.");
                 }

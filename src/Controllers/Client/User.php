@@ -107,7 +107,7 @@ class User extends PrivateController
         $this->prepareViewData();
 
         // Carga el archivo CSS específico para la vista de usuario
-        Site::addLink("public/css/username.css");
+        Site::addLink("public/css/usernamepass.css");
 
         // Renderiza la vista con los datos del formulario
         Renderer::render("Client/username", $this->viewData);
@@ -341,7 +341,7 @@ class User extends PrivateController
                     );
 
                     // Redirige con mensaje de éxito
-                    Site::redirectToWithMsg(LIST_URL, "Name changed successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Se ha cambiado el nombre exitósamente");
                 } else {
                     // Agrega error si falla la actualización
                     $this->innerError("global", "Something wrong happend while updating the Order.");

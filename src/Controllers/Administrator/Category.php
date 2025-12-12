@@ -234,7 +234,7 @@ class Category extends PrivateController
                         $this->viewData["categoryDescription"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Category created successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Categoria creada exitosamente");
                 } else {
                     $this->innerError("global", "Something wrong happend to save the new Category.");
                 }
@@ -248,7 +248,7 @@ class Category extends PrivateController
                         $this->viewData["estado"]
                     ) > 0
                 ) {
-                    Site::redirectToWithMsg(LIST_URL, "Category updated successfuly");
+                    Site::redirectToWithMsg(LIST_URL, "Categoria actualizada exitosamente");
                 } else {
                     $this->innerError("global", "Something wrong happend while updating the Category.");
                 }

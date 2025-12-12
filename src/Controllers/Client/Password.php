@@ -99,7 +99,7 @@ class Password extends PrivateController
         $this->prepareViewData();
 
         // Carga el archivo CSS específico para la vista de contraseña
-        Site::addLink("public/css/username.css");
+        Site::addLink("public/css/usernamepass.css");
 
         // Renderiza la vista con los datos del formulario
         Renderer::render("Client/password", $this->viewData);
